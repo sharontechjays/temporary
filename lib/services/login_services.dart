@@ -6,6 +6,8 @@ import 'package:test_flutter/models/user.dart';
 import 'package:test_flutter/utils.dart';
 import 'package:test_flutter/exceptions/auth_exception.dart';
 
+import '../models/otp_model.dart';
+
 class LoginServices {
   var client = RestClient(Dio());
   var util = Utils();
@@ -29,6 +31,21 @@ class LoginServices {
       Map<String, Object> param) async {
     try {
       var val = await client.createUser(
+        param,
+        "application/json",
+        "device",
+        "android",
+        Utils().getSecretKey(),
+      );
+      return val;
+    } catch (error) {
+      throw Future.error(error);
+    }
+  }
+  Future<OtpModel> verifyOtp(BuildContext context,
+      Map<String, Object> param) async {
+    try {
+      var val = await client.verifyOtp(
         param,
         "application/json",
         "device",

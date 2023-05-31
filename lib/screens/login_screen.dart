@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:test_flutter/models/user.dart';
+import 'package:test_flutter/app_routes.dart';
+import 'package:test_flutter/screens/verify_otp_screen.dart';
 import 'package:test_flutter/services/login_services.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,7 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
       LoginServices().postLoginCredentials(context, json).then((value) {
         if (value.result!) {
-          Fluttertoast.showToast(msg: value.msg!);
+          //Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, VerifyOtpScreen.routeName,
+              arguments: {
+                'mobileNumber': _mobileNumberController.text.trim(),
+                'countryCode': '+91',
+              });
         } else {
           Fluttertoast.showToast(msg: value.msg!);
         }

@@ -57,6 +57,43 @@ class _RestClient implements RestClient {
     return value;
   }
 
+  @override
+  Future<OtpModel> verifyOtp(
+    Map<String, dynamic> map,
+    String contentType,
+    String device,
+    String platform,
+    String secretKey,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Content-Type': contentType,
+      r'device': device,
+      r'platform': platform,
+      r'Secret-Key': secretKey,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(map);
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<OtpModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: contentType,
+    )
+            .compose(
+              _dio.options,
+              'verify_otp/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = OtpModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
