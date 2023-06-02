@@ -24,10 +24,9 @@ class VerifyOtpScreen extends StatefulWidget {
 }
 
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
-  var localStorage = SharedPreferencesHelper();
   final _verifyTextEditingController = TextEditingController();
 
-  void _postValues(String value) {
+  Future<void> _postValues(String value) async {
     if (value.trim().length == 4) {
       String mobileNumber = widget.mobileNumber;
       String countryCode = widget.countryCode;
@@ -37,20 +36,22 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
         "otp": _verifyTextEditingController.text.trim()
       };
 
-      LoginServices().verifyOtp(context, json).then((value) async {
+      try {
+        var value = await LoginServices().verifyOtp(context, json);
         if (value.result!) {
+          print(value.data.toString());
           SharedPreferencesHelper.init();
-          await SharedPreferencesHelper.setString('token', value.data!.token!);
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            Fluttertoast.showToast(msg: 'Toast message');
-          });
+          await SharedPreferencesHelper.setString(
+              'token', "Token ${value.data!.token!}");
+
+          await Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         } else {
           Fluttertoast.showToast(msg: value.msg!);
         }
-      }).catchError((onError) {
-        print(onError.toString());
-        Fluttertoast.showToast(msg: "error");
-      });
+      } catch (error) {
+        print(error.toString());
+        Fluttertoast.showToast(msg: "Error");
+      }
     }
   }
 
@@ -58,34 +59,27 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Container(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: TextField(
-                  controller: _verifyTextEditingController,
-                  onChanged: (value) => _postValues(value),
-                  maxLength: 4,
-                  decoration: const InputDecoration(
-                      label: Text("Please enter the OTP")),
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: TextField(
+                    controller: _verifyTextEditingController,
+                    onChanged: (value) => _postValues(value),
+                    maxLength: 4,
+                    decoration: const InputDecoration(
+                      labelText: "Please enter the OTP",
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }
-
-/*
-* {Secret-Key=gAAAAABju5HOav4K3tq1rCVSBKb20t7-Ha5P9o9OOVlnfnL9LuxtxNYEsVeD58YwXD5KXVBF3l_jBjagg86SceIgA4N6vhh57IpAvMmmEHRY0dnzsHoZYLWtVTkjq8t7GUbkkHXYol88Gj7Z1RpjXfnFkesL3vuWKA==, device=439890614c1f9d55, platform=android, Content-Type=application/json}
-09:26:17.127  D  https://stg-api.shieldup.ai/api/portal/verify_otp/
-09:26:17.127  D  POST
-09:26:17.127  D  retrofit2.RequestBuilder$ContentTypeOverridingRequestBody@eced000
-09:26:17.129  D  {"country_code":"+91","mobile_number":"9847402299","otp":"9999"}
-09:26:17.424  D  {"result":true,"msg":"OTP Verified Successfully","data":{"user_id":187,"token":"a827608c1ebbf2cb9dba91c9a3da9d060c7de65c","mobile_number":"9847402299","is_pin_available":true,"first_name":"Hgh","last_name":"Nnnd"}}
-* */
