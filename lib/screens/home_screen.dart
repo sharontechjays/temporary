@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:test_flutter/SharedPreferencesHelper.dart';
+import 'package:test_flutter/screens/homescreenitems/landing_screen.dart';
+import 'package:test_flutter/screens/homescreenitems/notification_screen.dart';
+import 'package:test_flutter/screens/homescreenitems/people_screen.dart';
+import 'package:test_flutter/screens/homescreenitems/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/screens/home_screen.dart';
@@ -12,75 +15,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var _selectedIndex = 0;
+
+  final List<Widget> _widgetOptions = [
+    const LandingScreen(),
+    const PeopleScreen(),
+    const NotificationScreen(),
+    const ProfileScreen(),
+  ];
+
   Future<String> getToken() async {
     SharedPreferencesHelper.init();
     String? token = await SharedPreferencesHelper.getString('token');
     return token ?? '';
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(10.0),
-          ),
+      body: SafeArea(
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: _widgetOptions,
         ),
-        bottomNavigationBar: SizedBox(
-          child: BottomNavigationBar(
-            showSelectedLabels: true,
-            showUnselectedLabels: false,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage("assets/images/ic_home.png"),
-                    size: 20,
-                  ),
-                  label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage("assets/images/ic_calendar.png"),
-                    size: 20,
-                  ),
-                  label: 'Calendar'),
-              BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage("assets/images/ic_friends.png"),
-                    size: 20,
-                  ),
-                  label: 'Friends'),
-              BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage("assets/images/ic_wallet.png"),
-                    size: 20,
-                  ),
-                  label: 'Wallet')
-            ],
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.amberAccent,
-            unselectedItemColor: Colors.grey,
-            iconSize: 26,
-            backgroundColor: Colors.white,
-            currentIndex: 0,
-          ),
-        ));
+      ),
+      bottomNavigationBar: SizedBox(
+        child: BottomNavigationBar(
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          items: const [
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/ic_home.png"),
+                size: 20,
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/ic_calendar.png"),
+                size: 20,
+              ),
+              label: 'Calendar',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/ic_notification.png"),
+                size: 20,
+              ),
+              label: 'Updates',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/ic_wallet.png"),
+                size: 20,
+              ),
+              label: 'Wallet',
+            ),
+          ],
+          type: BottomNavigationBarType.shifting,
+          selectedItemColor: Colors.amberAccent,
+          unselectedItemColor: Colors.grey,
+          iconSize: 20,
+          backgroundColor: Colors.white,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        ),
+      ),
+    );
   }
 }
-
-/*
-*
-*    child: FutureBuilder<String>(
-            future: getToken(),
-            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              } else if (snapshot.hasData) {
-                return Text(snapshot.data!);
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                return const Text('No token available');
-              }
-            },
-          ),
-* */
