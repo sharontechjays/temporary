@@ -16,12 +16,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     SharedPreferencesHelper.init();
-    var _token = SharedPreferencesHelper.getString('token');
+    var token = SharedPreferencesHelper.getString('token');
 
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(
         context,
-        (_token == null) ? LoginScreen.routeName : HomeScreen.routeName,
+        (token == null) ? LoginScreen.routeName : HomeScreen.routeName,
       );
     });
     super.initState();

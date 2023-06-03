@@ -21,26 +21,66 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: FutureBuilder<String>(
+        body: SafeArea(
+          child: Container(
+            padding: const EdgeInsets.all(10.0),
+          ),
+        ),
+        bottomNavigationBar: SizedBox(
+          child: BottomNavigationBar(
+            showSelectedLabels: true,
+            showUnselectedLabels: false,
+            items: const [
+              BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage("assets/images/ic_home.png"),
+                    size: 20,
+                  ),
+                  label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage("assets/images/ic_calendar.png"),
+                    size: 20,
+                  ),
+                  label: 'Calendar'),
+              BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage("assets/images/ic_friends.png"),
+                    size: 20,
+                  ),
+                  label: 'Friends'),
+              BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage("assets/images/ic_wallet.png"),
+                    size: 20,
+                  ),
+                  label: 'Wallet')
+            ],
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.amberAccent,
+            unselectedItemColor: Colors.grey,
+            iconSize: 26,
+            backgroundColor: Colors.white,
+            currentIndex: 0,
+          ),
+        ));
+  }
+}
+
+/*
+*
+*    child: FutureBuilder<String>(
             future: getToken(),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator(); // While waiting for the future to complete, display a progress indicator
+                return const CircularProgressIndicator();
               } else if (snapshot.hasData) {
-                return Text(snapshot.data!); // Display the token if the future completed successfully
+                return Text(snapshot.data!);
               } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}'); // Display an error message if an error occurred
+                return Text('Error: ${snapshot.error}');
               } else {
-                return const Text('No token available'); // Display a default message if no data or error is available
+                return const Text('No token available');
               }
             },
           ),
-        ),
-      ),
-    );
-  }
-
-}
+* */
