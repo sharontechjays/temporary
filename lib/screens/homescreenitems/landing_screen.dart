@@ -10,6 +10,8 @@ class LandingScreen extends StatefulWidget {
 class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(backgroundColor: Colors.amberAccent,);
+    return const Scaffold(
+      body: SafeArea(child: Text("")),
+    );
   }
 }
