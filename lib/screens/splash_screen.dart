@@ -1,4 +1,7 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_flutter/SharedPreferencesHelper.dart';
 import 'package:test_flutter/screens/home_screen.dart';
 import 'package:test_flutter/screens/login_screen.dart';
@@ -15,16 +18,31 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    SharedPreferencesHelper.init();
-    var token = SharedPreferencesHelper.getString('token');
-
+    var isValidToken=getValue()!=null && getValue()!="";
     Future.delayed(const Duration(seconds: 3), () {
+
+
       Navigator.pushReplacementNamed(
         context,
-        (token == null) ? LoginScreen.routeName : HomeScreen.routeName,
+        (!isValidToken)
+            ? LoginScreen.routeName
+            : HomeScreen.routeName,
       );
     });
+
+    print(getValue());
     super.initState();
+  }
+
+  Future<String?> getValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (prefs.containsKey('token')) {
+      String? token = prefs.getString('token');
+      return token;
+    }
+
+    return null;
   }
 
   @override
