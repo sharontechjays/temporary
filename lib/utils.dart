@@ -15,4 +15,9 @@ class Utils {
     var token = await SharedPreferencesHelper.getString('token');
     return token;
   }
+
+  String prettyPrint(String input) {
+    dynamic json = const JsonDecoder().convert(input);
+    return const JsonEncoder.withIndent('  ').convert(json);
+  }
 }

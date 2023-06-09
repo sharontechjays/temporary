@@ -9,7 +9,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  late String tokenValue;
+   String tokenValue="";
 
   Future<String?> getTokenValue() async {
     await SharedPreferencesHelper.init();

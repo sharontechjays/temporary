@@ -4,6 +4,7 @@ class Notifications {
   bool? nextLink;
   List<Data>? data;
 
+
   Notifications({this.result, this.msg, this.nextLink, this.data});
 
   Notifications.fromJson(Map<String, dynamic> json) {

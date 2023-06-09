@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/SharedPreferencesHelper.dart';
-import 'package:test_flutter/screens/homescreenitems/landing_screen.dart';
-import 'package:test_flutter/screens/homescreenitems/notification_screen.dart';
-import 'package:test_flutter/screens/homescreenitems/people_screen.dart';
-import 'package:test_flutter/screens/homescreenitems/profile_screen.dart';
+import 'homepage/landing_screen.dart';
+import 'homepage/notification_screen.dart';
+import 'homepage/people_screen.dart';
+import 'homepage/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/screens/home_screen.dart';

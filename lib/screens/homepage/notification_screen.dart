@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test_flutter/models/notifications.dart' as MyNotifications;
+import 'package:test_flutter/utils.dart';
 import 'package:test_flutter/widgets/notfication_item.dart';
 
 import '../../models/notifications.dart';
@@ -30,7 +34,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
   var json = {"offset": 0, "limit": 1000};
 
   Future<Notifications> loadData() async {
+    debugPrint('API Call: getNotifications');
+    debugPrint('Parameters: $json');
     return NotificationServices().getNotifications(context, json).then((value) {
+      var util = Utils();
+      final responseString = jsonEncode(value.toJson());
+      final formattedResponse = util.prettyPrint(responseString);
+      print('API Response: $formattedResponse');
       if (value.result!) {
         setState(() {
           mData.clear();

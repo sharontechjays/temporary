@@ -10,8 +10,8 @@ class LoginServices {
   var client = RestClient(Dio());
   var util = Utils();
 
-  Future<User> postLoginCredentials(BuildContext context,
-      Map<String, Object> param) async {
+  Future<User> postLoginCredentials(
+      BuildContext context, Map<String, Object> param) async {
     try {
       var val = await client.createUser(
         param,
@@ -22,11 +22,13 @@ class LoginServices {
       );
       return val;
     } catch (error) {
+      debugPrint('Error occurred during login: $error');
       throw Future.error(error);
     }
   }
-  Future<OtpModel> verifyOtp(BuildContext context,
-      Map<String, Object> param) async {
+
+  Future<OtpModel> verifyOtp(
+      BuildContext context, Map<String, Object> param) async {
     try {
       var val = await client.verifyOtp(
         param,
@@ -37,6 +39,7 @@ class LoginServices {
       );
       return val;
     } catch (error) {
+      debugPrint('Error occurred during OTP verification: $error');
       throw Future.error(error);
     }
   }
