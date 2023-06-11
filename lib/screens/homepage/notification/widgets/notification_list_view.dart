@@ -50,7 +50,7 @@ class _NotificationListViewState extends State<NotificationListView> {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
-    return currentScroll >= (maxScroll * 0.5);
+    return currentScroll >= (maxScroll * 0.9);
   }
 
   @override

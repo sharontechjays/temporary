@@ -16,12 +16,13 @@ class NotificationItem extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            radius: 30.0,
-            child: mProfilePic!.isNotEmpty
-                ? Image.network(notification.sentByUser!.mediumProfileImg!)
-                : Center(
-                    child: Text(notification.notificationData!.mobileNumber!
-                        .toString())),
+            backgroundColor: Colors.white,
+            radius: 25.0,
+            child: Image.network(
+              mProfilePic != null && mProfilePic.isNotEmpty
+                  ? notification.sentByUser!.mediumProfileImg!
+                  : 'https://force-field-dev.s3.amazonaws.com/common/images/default_user_image.png',
+            ),
           ),
           const SizedBox(
             width: 10,
