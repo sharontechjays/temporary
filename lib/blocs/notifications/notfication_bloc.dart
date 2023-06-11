@@ -7,6 +7,7 @@ import 'package:test_flutter/models/notifications.dart' as MyNotifications;
 import 'package:test_flutter/services/notfication_services.dart';
 import 'package:test_flutter/utils.dart';
 
+import '../../network_service/rest_client.dart';
 import 'notification_state.dart';
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
@@ -33,8 +34,12 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       final json = {'offset': offset, 'limit': limit};
       debugPrint('Parameters: $json');
 
-      final value =
-          await NotificationServices().getNotifications(context, json);
+      final notificationServices = NotificationServices(
+        RestClient.create(),
+        Utils(),
+      );
+
+      final value = await notificationServices.getNotifications(context, json);
 
       var util = Utils();
       final responseString = jsonEncode(value.toJson());
@@ -48,7 +53,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
           mData.add(value.data! as MyNotifications.Data);
         }
 
-        emit(NotificationLoadedState(mData));
+        emit(NotificationLoadedState(mData, value.nextLink!));
       } else {
         Fluttertoast.showToast(msg: value.msg!);
         emit(NotificationErrorState(value.msg!));

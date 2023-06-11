@@ -15,7 +15,7 @@ class NotificationScreen extends StatelessWidget {
       create: (context) => NotificationBloc(
         context: context,
         offset: 0,
-        limit: 10,
+        limit: 1,
         mData: [],
       )..add(LoadNotificationEvent()),
       child: Scaffold(

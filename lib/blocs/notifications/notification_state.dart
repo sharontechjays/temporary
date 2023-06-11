@@ -7,8 +7,9 @@ class NotificationInitialState extends NotificationState {}
 
 class NotificationLoadedState extends NotificationState {
   final List<MyNotifications.Data> notifications;
+  final bool nextLink;
 
-  NotificationLoadedState(this.notifications);
+  NotificationLoadedState(this.notifications, this.nextLink);
 }
 
 class NotificationErrorState extends NotificationState {
