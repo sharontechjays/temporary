@@ -14,11 +14,12 @@ class NotificationServices {
   NotificationServices(this.client, this.util);
 
   Future<Notifications> getNotifications(
-      BuildContext context, Map<String, Object> param) async {
+      BuildContext context, int offset, int limit) async {
     try {
       var token = await util.getToken(context);
       var val = await client.notificationList(
-        param,
+        offset,
+        limit,
         "application/json",
         "device",
         "android",

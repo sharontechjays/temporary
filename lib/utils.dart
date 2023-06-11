@@ -13,6 +13,7 @@ class Utils {
   Future<String?> getToken(BuildContext context) async {
     await SharedPreferencesHelper.init();
     var token = await SharedPreferencesHelper.getString('token');
+    debugPrint(token);
     return token;
   }
 

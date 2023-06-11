@@ -30,16 +30,13 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     Emitter<NotificationState> emit,
   ) async {
     try {
-      debugPrint('API Call: getNotifications');
-      final json = {'offset': offset, 'limit': limit};
-      debugPrint('Parameters: $json');
 
       final notificationServices = NotificationServices(
         RestClient.create(),
         Utils(),
       );
 
-      final value = await notificationServices.getNotifications(context, json);
+      final value = await notificationServices.getNotifications(context, offset,limit);
 
       var util = Utils();
       final responseString = jsonEncode(value.toJson());
