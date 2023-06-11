@@ -11,8 +11,8 @@ class NotificationServices {
   var client = RestClient(Dio());
   var util = Utils();
 
-  Future<Notifications> getNotifications(BuildContext context,
-      Map<String, Object> param) async {
+  Future<Notifications> getNotifications(
+      BuildContext context, Map<String, Object> param) async {
     try {
       var util = Utils();
       var token = await util.getToken(context);
@@ -27,10 +27,15 @@ class NotificationServices {
       return val;
     } catch (error) {
       print(error.toString());
+      if (error is DioException) {
+        if (error.response?.statusCode == 401) {
+          Fluttertoast.showToast(msg: error.response!.statusMessage!);
+          Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+          return Future.error(error);
+        }
+      }
       Fluttertoast.showToast(msg: error.toString());
-      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
       throw Future.error(error);
-
     }
   }
 }

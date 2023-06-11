@@ -1,72 +1,45 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:test_flutter/models/notifications.dart' as MyNotifications;
-import 'package:test_flutter/utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/widgets/notfication_item.dart';
 
-import '../../models/notifications.dart';
-import '../../services/notfication_services.dart';
+import '../../blocs/notifications/notfication_bloc.dart';
+import '../../blocs/notifications/notfication_event.dart';
+import '../../blocs/notifications/notification_state.dart';
 
-class NotificationScreen extends StatefulWidget {
+class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
-}
-
-class _NotificationScreenState extends State<NotificationScreen> {
-  int offset = 0;
-  int limit = 10;
-  bool isLoading = false;
-  bool isNextLink = false;
-  List<MyNotifications.Data> mData = [];
-
-  @override
-  void initState() {
-    loadData();
-    super.initState();
-  }
-
-  var json = {"offset": 0, "limit": 1000};
-
-  Future<Notifications> loadData() async {
-    debugPrint('API Call: getNotifications');
-    debugPrint('Parameters: $json');
-    return NotificationServices().getNotifications(context, json).then((value) {
-      var util = Utils();
-      final responseString = jsonEncode(value.toJson());
-      final formattedResponse = util.prettyPrint(responseString);
-      print('API Response: $formattedResponse');
-      if (value.result!) {
-        setState(() {
-          mData.clear();
-          if (offset == 0) {
-            mData.addAll(value.data!);
-          } else {
-            mData.add(value.data! as MyNotifications.Data);
-          }
-        });
-      } else {
-        Fluttertoast.showToast(msg: value.msg!);
-      }
-      return value;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: ListView.builder(
-        itemCount: mData.length,
-        itemBuilder: (context, index) {
-          final notification = mData[index];
-          return NotificationItem(notification: notification);
-        },
+    return BlocProvider(
+      create: (context) => NotificationBloc(
+        context: context,
+        offset: 0,
+        limit: 10,
+        mData: [],
+      )..add(LoadNotificationEvent()),
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: BlocBuilder<NotificationBloc, NotificationState>(
+          builder: (context, state) {
+            if (state is NotificationInitialState) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is NotificationLoadedState) {
+              final mData = state.notifications;
+              return ListView.builder(
+                itemCount: mData.length,
+                itemBuilder: (context, index) {
+                  final notification = mData[index];
+                  return NotificationItem(notification: notification);
+                },
+              );
+            } else if (state is NotificationErrorState) {
+              return Center(child: Text('Error: ${state.error}'));
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
     );
   }

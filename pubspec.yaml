@@ -42,6 +42,8 @@ dependencies:
   shared_preferences: ^2.1.1
   fluttertoast: ^8.2.1
   google_fonts: ^5.0.0
+  flutter_bloc:
+  equatable:
 
 dev_dependencies:
   flutter_test:
