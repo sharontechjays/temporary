@@ -59,9 +59,9 @@ abstract class RestClient {
         },
         onResponse: (response, handler) {
           if (kDebugMode) {
-            debugPrint(
+           /* debugPrint(
                 'API Response: ${response.statusCode} ${response.requestOptions.baseUrl}${response.requestOptions.path}');
-          }
+         */ }
           return handler.next(response);
         },
         onError: (DioError error, handler) {
