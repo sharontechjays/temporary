@@ -9,6 +9,7 @@ class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -36,7 +37,17 @@ class NotificationScreen extends StatelessWidget {
               final mData = state.notifications;
               return mData.isEmpty
                   ? const Center(child: Text('No notifications available.'))
-                  : NotificationListView(
+                  : Column(
+                children: [
+                  Text(
+                    'Notifications',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Expanded(
+                    child: NotificationListView(
                       notifications: mData,
                       loadNextPage: () {
                         context
@@ -45,7 +56,10 @@ class NotificationScreen extends StatelessWidget {
                       },
                       isNextPageAvailable: state.nextLink,
                       offset: context.read<NotificationBloc>().offset,
-                    );
+                    ),
+                  ),
+                ],
+              );
             } else {
               return Container();
             }
@@ -54,4 +68,5 @@ class NotificationScreen extends StatelessWidget {
       ),
     );
   }
+
 }
