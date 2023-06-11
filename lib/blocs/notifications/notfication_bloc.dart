@@ -30,13 +30,13 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     Emitter<NotificationState> emit,
   ) async {
     try {
-
       final notificationServices = NotificationServices(
         RestClient.create(),
         Utils(),
       );
 
-      final value = await notificationServices.getNotifications(context, offset,limit);
+      final value =
+          await notificationServices.getNotifications(context, offset, limit);
 
       var util = Utils();
       final responseString = jsonEncode(value.toJson());

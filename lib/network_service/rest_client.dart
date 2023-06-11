@@ -34,8 +34,8 @@ abstract class RestClient {
 
   @GET("notifications_list/")
   Future<Notifications> notificationList(
-      @Query("offset") int offset,
     @Query("limit") int limit,
+    @Query("offset") int offset,
     @Header("Content-Type") String contentType,
     @Header("device") String device,
     @Header("platform") String platform,

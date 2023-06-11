@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/SharedPreferencesHelper.dart';
+import 'package:test_flutter/screens/homepage/widgets/bottom_navigation_widget.dart';
 import 'homepage/landing_screen.dart';
-import 'homepage/notification_screen.dart';
+import 'homepage/notification/notification_screen.dart';
 import 'homepage/people_screen.dart';
 import 'homepage/profile_screen.dart';
 
@@ -30,64 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return token ?? '';
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: IndexedStack(
-          index: _selectedIndex,
-          children: _widgetOptions,
-        ),
-      ),
-      bottomNavigationBar: SizedBox(
-        child: BottomNavigationBar(
-          showSelectedLabels: true,
-          showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/ic_home.png"),
-                size: 20,
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/ic_calendar.png"),
-                size: 20,
-              ),
-              label: 'Calendar',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/ic_notification.png"),
-                size: 20,
-              ),
-              label: 'Updates',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/ic_wallet.png"),
-                size: 20,
-              ),
-              label: 'Wallet',
-            ),
-          ],
-          type: BottomNavigationBarType.shifting,
-          selectedItemColor: Colors.amberAccent,
-          unselectedItemColor: Colors.grey,
-          iconSize: 20,
-          backgroundColor: Colors.white,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-        ),
-      ),
+        body: SafeArea(
+        child: ValueListenableBuilder(
+        valueListenable: indexChangeNotifier,
+        builder: (context, int index, _) {
+      return _widgetOptions[index];
+    }),
+    ),
+    bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
 }

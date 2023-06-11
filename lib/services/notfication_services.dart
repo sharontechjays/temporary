@@ -18,8 +18,8 @@ class NotificationServices {
     try {
       var token = await util.getToken(context);
       var val = await client.notificationList(
-        offset,
         limit,
+        offset,
         "application/json",
         "device",
         "android",
