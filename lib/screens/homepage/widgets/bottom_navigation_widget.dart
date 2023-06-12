@@ -25,11 +25,11 @@ class BottomNavigationWidget extends StatelessWidget {
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.collections), label: 'People'),
+                    icon: Icon(Icons.people), label: 'People'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.emoji_emotions), label: 'Updates'),
+                    icon: Icon(Icons.notifications), label: 'Updates'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.download), label: 'Profile')
+                    icon: Icon(Icons.face), label: 'Profile')
               ]);
         });
   }

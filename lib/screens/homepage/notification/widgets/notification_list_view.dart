@@ -71,25 +71,13 @@ class _NotificationListViewState extends State<NotificationListView> {
       controller: _scrollController,
       separatorBuilder: (BuildContext context, int index) {
         return Container(
-          height: 2.0,
-          margin: EdgeInsets.symmetric(vertical: 10.0),
+          height: 1.0,
+          margin: const EdgeInsets.symmetric(vertical: 16,horizontal: 24),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFD4D4D4), Colors.white, Color(0xFFD4D4D4)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
+            color: const Color.fromRGBO(205, 205, 205, 0.5),
             borderRadius: BorderRadius.circular(4.0),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x1A000000),
-                blurRadius: 4.0,
-                offset: Offset(0, 2),
-              ),
-            ],
           ),
         );
-
       },
     );
   }

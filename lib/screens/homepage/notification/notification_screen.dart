@@ -38,28 +38,31 @@ class NotificationScreen extends StatelessWidget {
               return mData.isEmpty
                   ? const Center(child: Text('No notifications available.'))
                   : Column(
-                children: [
-                  Text(
-                    'Notifications',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Expanded(
-                    child: NotificationListView(
-                      notifications: mData,
-                      loadNextPage: () {
-                        context
-                            .read<NotificationBloc>()
-                            .add(LoadMoreNotificationEvent());
-                      },
-                      isNextPageAvailable: state.nextLink,
-                      offset: context.read<NotificationBloc>().offset,
-                    ),
-                  ),
-                ],
-              );
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 16.0,top: 16.0),
+                          child: Text(
+                            'Notifications',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: NotificationListView(
+                            notifications: mData,
+                            loadNextPage: () {
+                              context
+                                  .read<NotificationBloc>()
+                                  .add(LoadMoreNotificationEvent());
+                            },
+                            isNextPageAvailable: state.nextLink,
+                            offset: context.read<NotificationBloc>().offset,
+                          ),
+                        ),
+                      ],
+                    );
             } else {
               return Container();
             }
@@ -68,5 +71,4 @@ class NotificationScreen extends StatelessWidget {
       ),
     );
   }
-
 }
