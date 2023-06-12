@@ -4,7 +4,7 @@ import 'package:test_flutter/screens/homepage/widgets/bottom_navigation_widget.d
 import 'homepage/landing_screen.dart';
 import 'homepage/notification/notification_screen.dart';
 import 'homepage/people_screen.dart';
-import 'homepage/profile_screen.dart';
+import 'homepage/profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/screens/home_screen.dart';
