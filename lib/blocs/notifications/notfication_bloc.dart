@@ -17,7 +17,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   int offset;
   final int limit;
   final List<MyNotifications.Data> mData;
-  bool _isLoadingNextPage=true; // Flag to indicate if loading the next page is in progress
+  bool _isLoadingNextPage = true;
 
   NotificationBloc({
     required this.context,
@@ -25,15 +25,15 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     required this.limit,
     required this.mData,
   }) : super(NotificationInitialState()) {
-    _isLoadingNextPage = false; // Initialize the flag to false
+    _isLoadingNextPage = false;
     on<LoadNotificationEvent>(_onLoadNotificationEvent);
     on<LoadMoreNotificationEvent>(_onLoadMoreNotificationEvent);
   }
 
   Future<void> _onLoadNotificationEvent(
-      LoadNotificationEvent event,
-      Emitter<NotificationState> emit,
-      ) async {
+    LoadNotificationEvent event,
+    Emitter<NotificationState> emit,
+  ) async {
     try {
       final notificationServices = NotificationServices(
         RestClient.create(),
@@ -41,7 +41,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       );
 
       final value =
-      await notificationServices.getNotifications(context, offset, limit);
+          await notificationServices.getNotifications(context, offset, limit);
 
       var util = Utils();
       final responseString = jsonEncode(value.toJson());
@@ -70,9 +70,9 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   }
 
   Future<void> _onLoadMoreNotificationEvent(
-      LoadMoreNotificationEvent event,
-      Emitter<NotificationState> emit,
-      ) async {
+    LoadMoreNotificationEvent event,
+    Emitter<NotificationState> emit,
+  ) async {
     try {
       if (_isLoadingNextPage) return; // Check if loading is already in progress
 
@@ -84,7 +84,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       );
 
       final value =
-      await notificationServices.getNotifications(context, offset, limit);
+          await notificationServices.getNotifications(context, offset, limit);
 
       var util = Utils();
       offset += limit;
@@ -106,7 +106,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     } catch (error) {
       emit(NotificationErrorState(error.toString()));
     } finally {
-      _isLoadingNextPage = false; // Reset the flag after loading is completed
+      _isLoadingNextPage = false;
     }
   }
 }
