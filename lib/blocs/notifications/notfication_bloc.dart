@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:test_flutter/blocs/notifications/notfication_event.dart';
 
-import 'package:test_flutter/models/notifications.dart' as MyNotifications;
+import 'package:test_flutter/models/notifications.dart' as my_notifications;
 import 'package:test_flutter/utils.dart';
 
 import '../../network_service/rest_client.dart';
@@ -16,7 +16,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   final BuildContext context;
   int offset;
   final int limit;
-  final List<MyNotifications.Data> mData;
+  final List<my_notifications.Data> mData;
   bool _isLoadingNextPage = true;
 
   NotificationBloc({
