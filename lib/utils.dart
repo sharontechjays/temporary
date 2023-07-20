@@ -3,8 +3,6 @@ import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 import 'package:test_flutter/SharedPreferencesHelper.dart';
 
 class Utils {
@@ -23,7 +21,6 @@ class Utils {
     dynamic json = const JsonDecoder().convert(input);
     return const JsonEncoder.withIndent('  ').convert(json);
   }
-
 
   String getPlatformName() {
     if (Platform.isAndroid) {
