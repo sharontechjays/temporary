@@ -37,7 +37,7 @@ class Utils {
     } else if (Platform.isLinux) {
       return 'Linux';
     } else {
-      return 'Unknown Platform';
+      return 'Unknown Platformq';
     }
   }
 
