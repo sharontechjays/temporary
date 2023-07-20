@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Shield Up',
       routes: AppRoutes.appRoutes(context),
       navigatorKey: navKey,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData(),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

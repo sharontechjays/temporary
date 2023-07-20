@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:dio/dio.dart';
+import 'dart:io' as platform_dart;
 import 'package:flutter/foundation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:test_flutter/models/user.dart';
@@ -7,6 +10,7 @@ import 'package:dio/dio.dart' hide Headers;
 
 import '../models/notifications.dart';
 import '../models/otp_model.dart';
+import '../utils.dart';
 
 part 'rest_client.g.dart';
 
@@ -48,9 +52,16 @@ abstract class RestClient {
     final dio = Dio();
     dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
+        onRequest: (options, handler) async {
           final fullUrl = options.uri.toString();
           final queryParams = options.queryParameters;
+          final headers = options.headers;
+          headers['Content-Type']="application/json";
+          headers['device']=Utils().getDeviceId();
+          headers['platform']=Utils().getPlatformName();
+          @Header("Authorization") String token;
+
+
           debugPrint('API Request: ${options.method} $fullUrl');
           if (queryParams != null && queryParams.isNotEmpty) {
             debugPrint('Parameters: $queryParams');
@@ -64,7 +75,7 @@ abstract class RestClient {
          */ }
           return handler.next(response);
         },
-        onError: (DioError error, handler) {
+        onError: (DioException error, handler) {
           if (kDebugMode) {
             debugPrint(
                 'API Error: ${error.requestOptions.baseUrl}${error.requestOptions.path}');

@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
@@ -20,5 +22,35 @@ class Utils {
   String prettyPrint(String input) {
     dynamic json = const JsonDecoder().convert(input);
     return const JsonEncoder.withIndent('  ').convert(json);
+  }
+
+
+  String getPlatformName() {
+    if (Platform.isAndroid) {
+      return 'Android';
+    } else if (Platform.isIOS) {
+      return 'iOS';
+    } else if (Platform.isWindows) {
+      return 'Windows';
+    } else if (Platform.isMacOS) {
+      return 'macOS';
+    } else if (Platform.isLinux) {
+      return 'Linux';
+    } else {
+      return 'Unknown Platform';
+    }
+  }
+
+  Future<String> getDeviceId() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      return androidInfo.androidId; // Android device ID
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      return iosInfo.identifierForVendor; // iOS device ID
+    } else {
+      throw UnsupportedError('Unsupported platform');
+    }
   }
 }

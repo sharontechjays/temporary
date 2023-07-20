@@ -45,6 +45,7 @@ dependencies:
   google_fonts: ^5.0.0
   flutter_bloc:
   equatable:
+  device_info:
   built_value: ^8.0.0
   built_value_generator: ^8.0.0
 

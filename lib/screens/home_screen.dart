@@ -16,8 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var _selectedIndex = 0;
-
   final List<Widget> _widgetOptions = [
     const LandingScreen(),
     const PeopleScreen(),
@@ -34,14 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
+      body: SafeArea(
         child: ValueListenableBuilder(
-        valueListenable: indexChangeNotifier,
-        builder: (context, int index, _) {
-      return _widgetOptions[index];
-    }),
-    ),
-    bottomNavigationBar: const BottomNavigationWidget(),
+            valueListenable: indexChangeNotifier,
+            builder: (context, int index, _) {
+              return _widgetOptions[index];
+            }),
+      ),
+      bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
 }

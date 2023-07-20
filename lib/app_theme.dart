@@ -27,11 +27,11 @@ class AppTheme {
       // ignore: unrelated_type_equality_checks
       primaryColorLight: AppColors.light_blue,
       backgroundColor: Colors.white,
-      splashColor: Color(0xFF302b63),
+      splashColor: const Color(0xFF302b63),
       primarySwatch: mamaPink,
       scaffoldBackgroundColor: Colors.white,
       fontFamily: 'Poppins',
-      buttonTheme: ButtonThemeData(
+      buttonTheme: const ButtonThemeData(
         buttonColor: AppColors.splash_blue,
       ),
     );
