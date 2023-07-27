@@ -1,8 +1,8 @@
+/*
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:test_flutter/models/notifications.dart';
-import 'package:test_flutter/screens/login_screen.dart';
 import 'package:test_flutter/utils.dart';
 
 import '../network_service/rest_client.dart';
@@ -41,3 +41,4 @@ class NotificationServices {
     }
   }
 }
+*/

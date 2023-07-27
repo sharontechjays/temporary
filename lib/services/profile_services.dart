@@ -1,3 +1,4 @@
+/*
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:test_flutter/network_service/rest_client.dart';
@@ -27,3 +28,4 @@ class ProfileServices {
     }
   }
 }
+*/

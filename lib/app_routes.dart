@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:test_flutter/screens/splash_screen.dart';
 import 'package:test_flutter/screens/login_screen.dart';
@@ -23,3 +24,4 @@ class AppRoutes {
     };
   }
 }
+*/

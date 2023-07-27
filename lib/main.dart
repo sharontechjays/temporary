@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/presentation/pages/sign_in_screen.dart';
 import 'app_theme.dart';
-import 'screens/splash_screen.dart';
-import 'app_routes.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
@@ -12,16 +11,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Shield Up',
-      routes: AppRoutes.appRoutes(context),
+      title: 'Base setup',
       navigatorKey: navKey,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData(),
-      home: const SplashScreen(),
+      home: const SignInScreen(),
     );
   }
 }
