@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/services/login_services.dart';
 import 'sign_in_event.dart';
 import 'sign_in_state.dart';
 
@@ -13,12 +14,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     if (event is SignInButtonPressed) {
       emit(SignInLoading());
-      await Future.delayed(const Duration(seconds: 2));
-      if (event.email == 'example@example.com' &&
-          event.password == 'password') {
-        emit(SignInSuccess(message: 'Sign-in successful!'));
-      } else {
-        emit(SignInFailure(error: 'Invalid credentials.'));
+      var result = await LoginServices().loginUser(event.email, event.password);
+      if (result.username != "") {
+        emit(SignInSuccess(message: result.email));
       }
     }
   }

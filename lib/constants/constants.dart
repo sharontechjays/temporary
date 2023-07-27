@@ -23,8 +23,8 @@ class _Production extends Config {
   Environment get env => Environment.Production;
 }
 
-const String BASE_URL_STAGING = "https://stg-api.shieldup.ai/api/portal/";
-const String BASE_URL_DEV = "https://stg-api.shieldup.ai/api/portal/";
+const String BASE_URL_STAGING = "https://dummyjson.com/auth/";
+const String BASE_URL_DEV = "https://dummyjson.com/auth/";
 const Config CONFIG = _isDebug ? _Development() : _Production();
 const String BASE_URL = _isDebug ? BASE_URL_STAGING : BASE_URL_DEV;
 const DEFAULT_CONNECTION_TIMEOUT = 3000;

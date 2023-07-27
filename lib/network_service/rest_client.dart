@@ -1,89 +1,83 @@
-
+import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'dart:io' as platform_dart;
 import 'package:flutter/foundation.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:test_flutter/models/user.dart';
-import '../constants/constants.dart';
-import 'package:dio/dio.dart' hide Headers;
+import 'package:test_flutter/constants/constants.dart';
+import 'package:test_flutter/models/login_model.dart';
+import 'package:test_flutter/utils.dart';
 
-import '../models/notifications.dart';
-import '../models/otp_model.dart';
-import '../utils.dart';
+class RestClient {
+  static final RestClient _instance = RestClient._internal();
+  final Dio _dio;
 
-part 'rest_client.g.dart';
+  factory RestClient() {
+    return _instance;
+  }
 
-@RestApi(baseUrl: BASE_URL)
-abstract class RestClient {
-  factory RestClient(Dio dio, {String baseUrl}) = _RestClient._;
-
-  @POST("register_user/")
-  Future<User> createUser(
-    @Body() Map<String, dynamic> map,
-    @Header("Content-Type") String contentType,
-    @Header("device") String device,
-    @Header("platform") String platform,
-    @Header("Secret-Key") String secretKey,
-  );
-
-  @POST("verify_otp/")
-  Future<OtpModel> verifyOtp(
-    @Body() Map<String, dynamic> map,
-    @Header("Content-Type") String contentType,
-    @Header("device") String device,
-    @Header("platform") String platform,
-    @Header("Secret-Key") String secretKey,
-  );
-
-  @GET("notifications_list/")
-  Future<Notifications> notificationList(
-    @Query("limit") int limit,
-    @Query("offset") int offset,
-    @Header("Content-Type") String contentType,
-    @Header("device") String device,
-    @Header("platform") String platform,
-    @Header("Authorization") String token,
-  );
-
-  RestClient._();
-
-  static RestClient create() {
-    final dio = Dio();
-    dio.interceptors.add(
+  RestClient._internal() : _dio = Dio() {
+    _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final fullUrl = options.uri.toString();
+          options.baseUrl = BASE_URL;
+          options.connectTimeout = const Duration(seconds: 6);
+          options.receiveTimeout = const Duration(seconds: 6);
+          options.sendTimeout = const Duration(seconds: 6);
+
           final queryParams = options.queryParameters;
           final headers = options.headers;
-          headers['Content-Type']="application/json";
-          headers['device']=Utils().getDeviceId();
-          headers['platform']=Utils().getPlatformName();
-          @Header("Authorization") String token;
+          final body = options.data;
+          headers['Content-Type'] = "application/json";
+          headers['device'] = Utils().getDeviceId();
+          headers['platform'] = Utils().getPlatformName();
 
-
-          debugPrint('API Request: ${options.method} $fullUrl');
+          print('Request URl: ${options.method} ${options.uri}');
+          print('Request Body: ${options.data}');
           if (queryParams != null && queryParams.isNotEmpty) {
-            debugPrint('Parameters: $queryParams');
+            print('Parameters: $queryParams');
           }
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          if (kDebugMode) {
-           /* debugPrint(
-                'API Response: ${response.statusCode} ${response.requestOptions.baseUrl}${response.requestOptions.path}');
-         */ }
-          return handler.next(response);
+          print("StatusCode : ${response.statusCode}");
+          if (response.statusCode == 200) {
+            //return ApiResponse(data: response.data,result: true,msg: "success",isNextLink: true);
+            print("Response body : ${response.data}");
+            return handler.next(response);
+          } else {
+            print("Response body : ${response.data}");
+            return handler.next(response);
+          }
         },
         onError: (DioException error, handler) {
-          if (kDebugMode) {
-            debugPrint(
-                'API Error: ${error.requestOptions.baseUrl}${error.requestOptions.path}');
-          }
+          print('API Error:${error.message} ');
           return handler.next(error);
         },
       ),
     );
-    return RestClient(dio);
+  }
+
+  String _constructUrl(String endpoint) {
+    return '$BASE_URL$endpoint';
+  }
+
+  // end Points
+  String login = 'login';
+
+  //functions here
+
+  Future<LoginModel> loginUser(String email, String password) async {
+    final Map<String, dynamic> loginData = {
+      'username': email,
+      'password': password,
+    };
+    try {
+      final response = await _dio.post(
+        _constructUrl(login),
+        data: loginData,
+      );
+      return LoginModel.fromJson(response.data);
+    } catch (error) {
+      throw Exception('Login failed. Please check your credentials.');
+    }
   }
 }

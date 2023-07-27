@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/presentation/pages/homepage.dart';
 
 import '../blocs/sign_in/sign_in_bloc.dart';
 import '../blocs/sign_in/sign_in_event.dart';
 import '../blocs/sign_in/sign_in_state.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,9 @@ class SignInScreen extends StatelessWidget {
   }
 }
 
+
 class SignInForm extends StatefulWidget {
-  SignInForm({super.key});
+  const SignInForm({Key? key}) : super(key: key);
 
   @override
   State<SignInForm> createState() => _SignInFormState();
@@ -64,18 +66,26 @@ class _SignInFormState extends State<SignInForm> {
             child: const Text('Sign In'),
           ),
           const SizedBox(height: 16),
-          BlocBuilder<SignInBloc, SignInState>(
-            builder: (context, state) {
-              if (state is SignInLoading) {
-                return const CircularProgressIndicator();
-              } else if (state is SignInSuccess) {
-                return Text(state.message);
-              } else if (state is SignInFailure) {
-                return Text(state.error);
-              } else {
-                return Container();
+          BlocListener<SignInBloc, SignInState>(
+            listener: (context, state) {
+              if (state is SignInSuccess) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
               }
             },
+            child: BlocBuilder<SignInBloc, SignInState>(
+              builder: (context, state) {
+                if (state is SignInLoading) {
+                  return const CircularProgressIndicator();
+                } else if (state is SignInFailure) {
+                  return Text(state.error);
+                } else {
+                  return Container();
+                }
+              },
+            ),
           ),
         ],
       ),
