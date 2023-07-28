@@ -1,8 +1,17 @@
 class ApiResponse<T> {
-  T? data;
-  bool result = true;
-  String? msg;
-  bool? isNextLink = true;
+  final T? data;
+  final bool result;
+  final String msg;
+  final bool isNextLink;
+  final int? statusCode;
+  final dynamic responseData;
 
-  ApiResponse({this.result = false, this.msg, this.data, this.isNextLink});
+  ApiResponse({
+    required this.result,
+    required this.msg,
+    required this.data,
+    this.isNextLink = false,
+    this.statusCode,
+    this.responseData,
+  });
 }
