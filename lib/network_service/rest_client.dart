@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:math';
 
@@ -69,7 +70,7 @@ class RestClient {
   // end Points
   String login = 'login';
 
-  //functions heres
+  //functions here
   Future<ApiResponse<LoginModel>> loginUser(
       String email, String password) async {
     final Map<String, dynamic> loginData = {
@@ -81,16 +82,19 @@ class RestClient {
         _constructUrl(login),
         data: loginData,
       );
-      return handleResponse<LoginModel, LoginModel>(response);
+      return handleResponse<LoginModel>(response, LoginModel.fromJson);
     } catch (error) {
       return handleErrorResponse<LoginModel>(error);
     }
   }
 
-  ApiResponse<T> handleResponse<T, R>(Response<dynamic> response) {
+  ApiResponse<T> handleResponse<T>(
+    Response<dynamic> response,
+    T Function(Map<String, dynamic>) fromJson,
+  ) {
     if (response.statusCode == 200) {
       return ApiResponse<T>(
-        data: LoginModel.fromJson(response.data) as T,
+        data: fromJson(response.data),
         result: true,
         msg: "success",
         isNextLink: true,
@@ -107,10 +111,11 @@ class RestClient {
 
   ApiResponse<T> handleErrorResponse<T>(dynamic error) {
     if (error is DioException && error.response != null) {
+      print(error.response);
       return ApiResponse<T>(
         result: false,
         data: null,
-        msg: "Request failed with status code ${error.response!.statusCode}",
+        msg: "${error.response!.statusCode}/${error.response!.data['message']}",
         statusCode: error.response!.statusCode!,
         responseData: error.response!.data,
       );
@@ -118,7 +123,7 @@ class RestClient {
       return ApiResponse<T>(
         result: false,
         msg: "Error occurred",
-        data: error.toString() as T,
+        data: null,
       );
     }
   }
