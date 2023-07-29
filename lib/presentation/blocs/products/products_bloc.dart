@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_flutter/models/products_model.dart';
-import 'package:test_flutter/services/product_services.dart';
+import '../../../data/models/products_model.dart';
+import '../../../data/services/product_services.dart';
 import 'products_event.dart';
 import 'products_state.dart';
 

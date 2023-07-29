@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:test_flutter/SharedPreferencesHelper.dart';
-import 'package:test_flutter/presentation/pages/homepage.dart';
+import 'package:test_flutter/data/SharedPreferencesHelper.dart';
+
 
 import '../blocs/sign_in/sign_in_bloc.dart';
 import '../blocs/sign_in/sign_in_event.dart';
 import '../blocs/sign_in/sign_in_state.dart';
+import 'homepage.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);

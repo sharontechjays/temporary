@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_flutter/services/login_services.dart';
+import '../../../data/services/login_services.dart';
 import 'sign_in_event.dart';
 import 'sign_in_state.dart';
 

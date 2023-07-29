@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/presentation/pages/sign_in_screen.dart';
 import 'app_theme.dart';
+import 'presentation/screens/sign_in_screen.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 

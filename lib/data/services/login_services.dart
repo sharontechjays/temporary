@@ -1,6 +1,8 @@
-import 'package:test_flutter/models/api_response.dart';
-import 'package:test_flutter/network_service/rest_client.dart';
+
+
+import '../models/api_response.dart';
 import '../models/login_model.dart';
+import '../network_service/rest_client.dart';
 
 class LoginServices {
   String login = 'auth/login';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/presentation/blocs/products/products_bloc.dart';
-import '../../../utils/app_dialogs.dart';
-import '../../../utils/endlessscroller/endless_recycler_impl.dart';
 import '../../blocs/products/products_event.dart';
 import '../../blocs/products/products_state.dart';
+import '../../utils/app_dialogs.dart';
+import '../../utils/endlessscroller/endless_recycler_impl.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);

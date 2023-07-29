@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_flutter/presentation/pages/products/products_screen.dart';
-import 'package:test_flutter/presentation/pages/screen_one.dart';
-
 import '../blocs/homepage/homepage_bloc.dart';
 import '../blocs/homepage/homepage_event.dart';
 import '../blocs/homepage/homepage_state.dart';
+import 'products/products_screen.dart';
+import 'screen_one.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

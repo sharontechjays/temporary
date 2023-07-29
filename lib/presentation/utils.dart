@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:test_flutter/SharedPreferencesHelper.dart';
+import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 
 class Utils {
   String getSecretKey() {

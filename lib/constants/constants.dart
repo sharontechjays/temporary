@@ -27,5 +27,3 @@ const String BASE_URL_STAGING = "https://dummyjson.com/";
 const String BASE_URL_DEV = "https://dummyjson.com/";
 const Config CONFIG = _isDebug ? _Development() : _Production();
 const String BASE_URL = _isDebug ? BASE_URL_STAGING : BASE_URL_DEV;
-const DEFAULT_CONNECTION_TIMEOUT = 3000;
-const DEFAULT_RECEIVE_TIMEOUT_LONG = 5000;
