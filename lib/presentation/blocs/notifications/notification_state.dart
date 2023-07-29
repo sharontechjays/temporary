@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:test_flutter/models/products_model.dart';
 
 abstract class NotificationsState extends Equatable {
   const NotificationsState();
@@ -12,7 +13,7 @@ class NotificationsInitial extends NotificationsState {}
 class NotificationsLoading extends NotificationsState {}
 
 class NotificationsLoaded extends NotificationsState {
-  final List<String> notifications;
+  final List<Products> notifications;
 
   const NotificationsLoaded(this.notifications);
 

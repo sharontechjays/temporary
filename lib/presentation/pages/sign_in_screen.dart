@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_flutter/SharedPreferencesHelper.dart';
 import 'package:test_flutter/presentation/pages/homepage.dart';
 
 import '../blocs/sign_in/sign_in_bloc.dart';
@@ -23,7 +25,6 @@ class SignInScreen extends StatelessWidget {
   }
 }
 
-
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
 
@@ -34,6 +35,7 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +53,16 @@ class _SignInFormState extends State<SignInForm> {
           ),
           const SizedBox(height: 16),
           TextFormField(
-            decoration: const InputDecoration(labelText: 'Password'),
-            obscureText: true,
+            decoration: InputDecoration(
+              labelText: 'Password',
+              suffixIcon: IconButton(
+                icon: _isPasswordVisible
+                    ? const Icon(Icons.visibility_off)
+                    : const Icon(Icons.visibility),
+                onPressed: _togglePasswordVisibility,
+              ),
+            ),
+            obscureText: !_isPasswordVisible,
             controller: passwordController,
           ),
           const SizedBox(height: 24),
@@ -69,10 +79,16 @@ class _SignInFormState extends State<SignInForm> {
           BlocListener<SignInBloc, SignInState>(
             listener: (context, state) {
               if (state is SignInSuccess) {
+                SharedPreferencesHelper.init();
+                SharedPreferencesHelper.setDummyToken(state.message);
+                print(state.message);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const HomePage()),
                 );
+              }
+              if (state is SignInFailure) {
+                clearForm(context);
               }
             },
             child: BlocBuilder<SignInBloc, SignInState>(
@@ -90,5 +106,17 @@ class _SignInFormState extends State<SignInForm> {
         ],
       ),
     );
+  }
+
+  void clearForm(BuildContext context) {
+    emailController.clear();
+    passwordController.clear();
+    FocusScope.of(context).unfocus();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
+    });
   }
 }

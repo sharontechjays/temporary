@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:test_flutter/SharedPreferencesHelper.dart';
 import 'package:test_flutter/constants/constants.dart';
 import 'package:test_flutter/models/api_response.dart';
 import 'package:test_flutter/models/login_model.dart';
@@ -29,7 +31,9 @@ class RestClient {
         headers['Content-Type'] = "application/json";
         headers['device'] = Utils().getDeviceId();
         headers['platform'] = Utils().getPlatformName();
-
+        SharedPreferencesHelper.init();
+        headers['Authorization'] =
+            "Bearer ${SharedPreferencesHelper.getDummyToken()}";
         print('Request URl: ${options.method} ${options.uri}');
         print('Request Body: ${options.data}');
         if (queryParams != null && queryParams.isNotEmpty) {
@@ -67,24 +71,31 @@ class RestClient {
     return '$BASE_URL$endpoint';
   }
 
-  // end Points
-  String login = 'login';
-
-  //functions here
-  Future<ApiResponse<LoginModel>> loginUser(
-      String email, String password) async {
-    final Map<String, dynamic> loginData = {
-      'username': email,
-      'password': password,
-    };
+  Future<ApiResponse<T>> postRequest<T>({
+    required String endpoint,
+    required Map<String, dynamic> data,
+    required T Function(Map<String, dynamic>) fromJson,
+  }) async {
     try {
-      final response = await _dio.post(
-        _constructUrl(login),
-        data: loginData,
-      );
-      return handleResponse<LoginModel>(response, LoginModel.fromJson);
+      final response = await _dio.post(_constructUrl(endpoint), data: data);
+      return handleResponse<T>(response, fromJson);
     } catch (error) {
-      return handleErrorResponse<LoginModel>(error);
+      return handleErrorResponse<T>(error);
+    }
+  }
+
+  Future<ApiResponse<T>> getRequest<T>({
+    required String endpoint,
+    required T Function(Map<String, dynamic>) fromJson,
+  }) async {
+    try {
+      final response = await _dio.get(_constructUrl(endpoint));
+      debugPrint('API Response Status Code: ${response.statusCode}');
+      debugPrint('API Response Body: ${response.data}');
+      return handleResponse<T>(response, fromJson);
+    } catch (error) {
+      print('API Error: $error');
+      return handleErrorResponse<T>(error);
     }
   }
 

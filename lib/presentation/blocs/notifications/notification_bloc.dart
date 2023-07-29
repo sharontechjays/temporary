@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/models/api_response.dart';
+import 'package:test_flutter/models/products_model.dart';
+import 'package:test_flutter/services/notfication_services.dart';
 import 'notification_event.dart';
 import 'notification_state.dart';
 
@@ -8,7 +11,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     on<FetchNotifications>(_onFetchNotifications);
   }
 
-  List<String> notifications = [];
+  List<Products> products = [];
   int offset = 0;
   int limit = 5;
   bool isNextLink = true;
@@ -22,47 +25,21 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         emit(NotificationsLoading());
         offset = event.offset;
         limit = event.limit;
-        final newNotifications =
-            await getNotifications(event.offset, event.limit);
-        debugPrint("offset-->$offset");
-        if (isNextLink && newNotifications.isNotEmpty) {
-          notifications.addAll(newNotifications);
+        final newProducts = await ProductServices().getProducts();
+        debugPrint("offset-->${newProducts.data!.products.length}");
+        if (isNextLink && newProducts.data!.products.isNotEmpty) {
+          products.addAll(newProducts.data!.products);
         }
         if (offset >= 30) {
           isNextLink = false;
         }
-        emit(NotificationsLoaded(notifications));
-        if (newNotifications.isEmpty && offset == 0) {
+        emit(NotificationsLoaded(products));
+        if (newProducts.data!.products.isEmpty && offset == 0) {
           emit(const NotificationEmpty("No Notifications"));
         }
       } catch (e) {
-        emit(const NotificationsError('Failed to fetch notifications.'));
+        emit(NotificationsError(e.toString()));
       }
     }
-  }
-
-  Future<List<String>> getNotifications(int page, int limit) async {
-    return [
-      "String 1",
-      "String 2",
-      "String 3",
-      "String 4",
-      "String 5",
-      "String 6",
-      "String 7",
-      "String 8",
-      "String 9",
-      "String 10",
-      "String 11",
-      "String 12",
-      "String 13",
-      "String 14",
-      "String 15",
-      "String 16",
-      "String 17",
-      "String 18",
-      "String 19",
-      "String 20",
-    ];
   }
 }

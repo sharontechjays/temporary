@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/presentation/pages/screen_one.dart';
 
 import '../blocs/homepage/homepage_bloc.dart';
 import '../blocs/homepage/homepage_event.dart';
@@ -70,7 +71,7 @@ class HomePageManager extends StatelessWidget {
   Widget _buildCurrentScreen(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return const NotificationScreen();
+        return const ScreenOne();
       case 1:
         return const NotificationScreen();
       case 2:

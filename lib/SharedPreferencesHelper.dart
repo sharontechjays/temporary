@@ -32,6 +32,14 @@ class SharedPreferencesHelper {
     await _prefs?.setString(key, value);
   }
 
+  static Future<void> setDummyToken(String value) async {
+    await _prefs?.setString("DummyToken", value);
+  }
+
+  static Future<String?> getDummyToken() async {
+    return _prefs?.getString("DummyToken") ?? "";
+  }
+
   static Future<double?> getDouble(String key,
       {double defaultValue = 0.0}) async {
     return _prefs?.getDouble(key) ?? defaultValue;
@@ -53,7 +61,8 @@ class SharedPreferencesHelper {
   static Future<void> remove(String key) async {
     await _prefs?.remove(key);
   }
-  static Future<void> clearAll() async{
+
+  static Future<void> clearAll() async {
     await _prefs?.clear();
-}
+  }
 }

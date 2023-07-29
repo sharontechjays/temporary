@@ -64,7 +64,7 @@ class _NotificationScreenState extends State<NotificationScreen>
 
   Future<void> _onRefresh() async {
     _notificationsBloc.offset = 0;
-    _notificationsBloc.notifications.clear();
+    _notificationsBloc.products.clear();
     _notificationsBloc.isNextLink = true;
     _notificationsBloc.add(FetchNotifications(
         _notificationsBloc.offset, _notificationsBloc.limit));
@@ -104,12 +104,12 @@ class _NotificationScreenState extends State<NotificationScreen>
     return ListView.separated(
       controller: _scrollController,
       itemCount:
-      state.notifications.length + (_notificationsBloc.isNextLink ? 1 : 0),
+          state.notifications.length + (_notificationsBloc.isNextLink ? 1 : 0),
       itemBuilder: (context, index) {
         if (index < state.notifications.length) {
           final notification = state.notifications[index];
           return ListTile(
-            title: Text("$notification >> $index"),
+            title: Text("${notification.brand}>> $index"),
           );
         } else if (_notificationsBloc.isNextLink) {
           return const Center(child: CircularProgressIndicator());
@@ -123,6 +123,4 @@ class _NotificationScreenState extends State<NotificationScreen>
       separatorBuilder: (context, index) => const Divider(),
     );
   }
-
 }
-

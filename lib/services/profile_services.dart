@@ -5,7 +5,7 @@ import 'package:test_flutter/network_service/rest_client.dart';
 import 'package:test_flutter/models/user.dart';
 import 'package:test_flutter/utils.dart';
 
-import '../models/otp_model.dart';
+import '../models/products_model.dart';
 
 class ProfileServices {
   var client = RestClient(Dio());

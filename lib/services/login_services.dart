@@ -1,14 +1,20 @@
 import 'package:test_flutter/models/api_response.dart';
 import 'package:test_flutter/network_service/rest_client.dart';
-
-import '../constants/constants.dart';
 import '../models/login_model.dart';
-import '../models/user.dart';
 
 class LoginServices {
-  Future<ApiResponse<LoginModel>> loginUser(String email, String password) async {
+  String login = 'auth/login';
+
+  Future<ApiResponse<LoginModel>> loginUser(
+      String email, String password) async {
     var dioClient = RestClient();
-    var result = dioClient.loginUser(email, password);
-    return result;
+    return dioClient.postRequest<LoginModel>(
+      endpoint: login,
+      data: {
+        'username': email,
+        'password': password,
+      },
+      fromJson: (json) => LoginModel.fromJson(json),
+    );
   }
 }

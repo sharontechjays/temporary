@@ -16,9 +16,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(SignInLoading());
       var result = await LoginServices().loginUser(event.email, event.password);
       if (result.result) {
-        emit(SignInSuccess(message: result.data!.email));
+        emit(SignInSuccess(message: result.data!.token));
       } else {
-        emit(SignInFailure(error: result.msg??"end"));
+        emit(SignInFailure(error: result.msg));
       }
     }
   }
