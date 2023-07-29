@@ -3,23 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color dark_blue = Color(0xFF3E4653);
-  static const Color light_blue = Color(0xFF717f95);
-  static const Color light_white = Color(0xfff3f3f4);
-  static const Color light_grey = Color(0xffF5F5F5);
-  static const Color toggle_color = Color(0xffDDDDDD);
-  static const Color pale_white = Color(0xffF7F7F7);
-  static const Color white = Colors.white;
-  static const Color black = Colors.black;
-  static const Color trasparent = Colors.transparent;
-  static const Color gold = Colors.amber;
-  static const Color grey = Colors.grey;
-  static const Color bg_grey = Color(0xffFAFAFA);
-  static const Color green = Colors.green;
-  static const Color check_green = Color(0xff1DDEA4);
-  static const Color cyan = Color(0xff008B8B);
-  static const Color red = Colors.red;
+
   static const Color chilli = Color(0xffFD003A);
+  static const Color Primary_purple = Color(0xff8980F1);
+  static const Color Secondary_purple = Color(0xff5B51CF);
   static final Color light_gold = Colors.amber.withOpacity(0.5);
   static const Color splash_blue = Color(0xff325CF0);
   static const Color edit_text_bg = Color(0xffF4F6FA);

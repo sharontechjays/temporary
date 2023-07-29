@@ -22,10 +22,10 @@ class AppTheme {
 
     return ThemeData(
       // ignore: unrelated_type_equality_checks
-      primaryColor: AppColors.dark_blue,
+      primaryColor: AppColors.Primary_purple,
       // Colors.pinkAccent,
       // ignore: unrelated_type_equality_checks
-      primaryColorLight: AppColors.light_blue,
+      primaryColorLight: AppColors.Secondary_purple,
       backgroundColor: Colors.white,
       splashColor: const Color(0xFF302b63),
       primarySwatch: mamaPink,

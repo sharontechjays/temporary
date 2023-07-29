@@ -6,16 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 
 class Utils {
-  String getSecretKey() {
-    return "gAAAAABju5HOav4K3tq1rCVSBKb20t7-Ha5P9o9OOVlnfnL9LuxtxNYEsVeD58YwXD5KXVBF3l_jBjagg86SceIgA4N6vhh57IpAvMmmEHRY0dnzsHoZYLWtVTkjq8t7GUbkkHXYol88Gj7Z1RpjXfnFkesL3vuWKA==";
-  }
-
-  Future<String?> getToken(BuildContext context) async {
-    await SharedPreferencesHelper.init();
-    var token = await SharedPreferencesHelper.getString('token');
-    debugPrint(token);
-    return token;
-  }
 
   String prettyPrint(String input) {
     dynamic json = const JsonDecoder().convert(input);
@@ -38,14 +28,35 @@ class Utils {
     }
   }
 
+  Image buildImage(String url) {
+    return Image.network(
+      url,
+      cacheWidth: 100,
+      cacheHeight: 100,
+      fit: BoxFit.cover,
+      loadingBuilder:
+          (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) return child;
+        return const Center(
+          child: SizedBox(
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+    );
+  }
+
+
   Future<String> getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      return androidInfo.androidId; // Android device ID
+      return androidInfo.androidId;
     } else if (Platform.isIOS) {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-      return iosInfo.identifierForVendor; // iOS device ID
+      return iosInfo.identifierForVendor;
     } else {
       throw UnsupportedError('Unsupported platform');
     }

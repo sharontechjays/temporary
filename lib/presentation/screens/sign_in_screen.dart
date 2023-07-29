@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
-
+import 'package:test_flutter/presentation/constants/app_colors.dart';
 
 import '../blocs/sign_in/sign_in_bloc.dart';
 import '../blocs/sign_in/sign_in_event.dart';
@@ -48,33 +48,63 @@ class _SignInFormState extends State<SignInForm> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextFormField(
-            decoration: const InputDecoration(labelText: 'Email'),
+            decoration: const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color:AppColors.Secondary_purple),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color:AppColors.Secondary_purple),
+              ),
+              labelText: 'Email',
+              labelStyle: TextStyle(color: )
+
+            ),
             keyboardType: TextInputType.emailAddress,
             controller: emailController,
           ),
           const SizedBox(height: 16),
           TextFormField(
             decoration: InputDecoration(
-              labelText: 'Password',
-              suffixIcon: IconButton(
-                icon: _isPasswordVisible
-                    ? const Icon(Icons.visibility_off)
-                    : const Icon(Icons.visibility),
-                onPressed: _togglePasswordVisibility,
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color:AppColors.Secondary_purple),
               ),
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color:AppColors.Secondary_purple),
+              ),
+                suffixIcon: IconButton(
+                  icon: _isPasswordVisible
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
+                  onPressed: _togglePasswordVisibility,
+                )
+                ,
+              labelText: 'Password',
+
             ),
             obscureText: !_isPasswordVisible,
             controller: passwordController,
           ),
           const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: () {
+          InkWell(
+            onTap: (){
               bloc.add(SignInButtonPressed(
                 email: emailController.text,
                 password: passwordController.text,
               ));
             },
-            child: const Text('Sign In'),
+            child: Container(
+              height: 50,
+              decoration:  BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                gradient: const LinearGradient(
+                    colors: [AppColors.Primary_purple, AppColors.Secondary_purple],
+                    begin: FractionalOffset(0.0, 0.0),
+                    end: FractionalOffset(0.5, 0.0),
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp),
+              ),
+              child: Center(child: const Text('Sign In')),
+            ),
           ),
           const SizedBox(height: 16),
           BlocListener<SignInBloc, SignInState>(
