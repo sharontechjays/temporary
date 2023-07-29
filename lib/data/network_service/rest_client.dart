@@ -5,9 +5,10 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
-import 'package:test_flutter/constants/constants.dart';
 import 'package:test_flutter/data/models/api_response.dart';
 import 'package:test_flutter/presentation/utils.dart';
+
+import '../../presentation/constants/constants.dart';
 
 
 class RestClient {
