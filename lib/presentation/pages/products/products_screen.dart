@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/presentation/blocs/products/products_bloc.dart';
+import '../../../utils/app_dialogs.dart';
 import '../../../utils/endlessscroller/endless_recycler_impl.dart';
 import '../../blocs/products/products_event.dart';
 import '../../blocs/products/products_state.dart';
@@ -111,9 +112,13 @@ class _ProductsScreenState extends State<ProductsScreen>
             subtitle: Text(notification.brand),
             children: [
               notification.images.isNotEmpty
-                  ? Image.network(notification.images.first)
+                  ? InkWell(
+                      onTap: () {
+                        showCustomDialog(context);
+                      },
+                      child: Image.network(notification.images.first))
                   : const SizedBox(),
-              Text("Category: ${notification.category}"),
+              InkWell(child: Text("Category: ${notification.category}")),
               Text("Description: ${notification.description}"),
               Text("Discount: ${notification.discountPercentage}"),
               Text("Rating: ${notification.rating}"),
@@ -130,5 +135,34 @@ class _ProductsScreenState extends State<ProductsScreen>
       },
       separatorBuilder: (context, index) => const Divider(),
     );
+  }
+
+  void showCustomDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomOKActionButton(
+          title: "Custom Dialog Title",
+          message: "This is a custom dialog message.",
+          positiveLabel: "OK",
+          // Replace with the label for the positive button
+          negativeLabel: "Cancel",
+          // Replace with the label for the negative button
+          positiveFunction: onPositiveAction,
+          negativeFunction: onNegativeAction,
+        );
+      },
+    );
+  }
+
+  void onPositiveAction() {
+    // Your logic for positive action goes here
+    print("Positive button pressed!");
+  }
+
+// Create the function you want to execute when the negative button is pressed
+  void onNegativeAction() {
+    // Your logic for negative action goes here
+    print("Negative button pressed!");
   }
 }
