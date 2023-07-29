@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/presentation/pages/products/products_screen.dart';
 import 'package:test_flutter/presentation/pages/screen_one.dart';
 
 import '../blocs/homepage/homepage_bloc.dart';
 import '../blocs/homepage/homepage_event.dart';
 import '../blocs/homepage/homepage_state.dart';
-import 'notification/notifications_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -73,11 +73,11 @@ class HomePageManager extends StatelessWidget {
       case 0:
         return const ScreenOne();
       case 1:
-        return const NotificationScreen();
+        return const ProductsScreen();
       case 2:
-        return const NotificationScreen();
+        return const ProductsScreen();
       default:
-        return const NotificationScreen();
+        return const ProductsScreen();
     }
   }
 }

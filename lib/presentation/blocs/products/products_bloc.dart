@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_flutter/models/api_response.dart';
 import 'package:test_flutter/models/products_model.dart';
 import 'package:test_flutter/services/notfication_services.dart';
-import 'notification_event.dart';
-import 'notification_state.dart';
+import 'products_event.dart';
+import 'products_state.dart';
 
-class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
-  NotificationsBloc() : super(NotificationsInitial()) {
+class NotificationsBloc extends Bloc<NotificationsEvent, ProductsState> {
+  NotificationsBloc() : super(ProductsInitial()) {
     on<FetchNotifications>(_onFetchNotifications);
   }
 
@@ -18,11 +17,11 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
   void _onFetchNotifications(
     FetchNotifications event,
-    Emitter<NotificationsState> emit,
+    Emitter<ProductsState> emit,
   ) async {
     if (isNextLink) {
       try {
-        emit(NotificationsLoading());
+        emit(ProductsLoading());
         offset = event.offset;
         limit = event.limit;
         final newProducts = await ProductServices().getProducts();
@@ -30,15 +29,15 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         if (isNextLink && newProducts.data!.products.isNotEmpty) {
           products.addAll(newProducts.data!.products);
         }
-        if (offset >= 30) {
+        if (products.isNotEmpty) {
           isNextLink = false;
         }
-        emit(NotificationsLoaded(products));
+        emit(ProductsLoaded(products));
         if (newProducts.data!.products.isEmpty && offset == 0) {
-          emit(const NotificationEmpty("No Notifications"));
+          emit(const ProductsEmpty("No Notifications"));
         }
       } catch (e) {
-        emit(NotificationsError(e.toString()));
+        emit(ProductsError(e.toString()));
       }
     }
   }
