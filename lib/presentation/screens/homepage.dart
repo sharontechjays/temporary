@@ -70,7 +70,7 @@ class HomePageManager extends StatelessWidget {
   Widget _buildCurrentScreen(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return const ScreenOne();
+        return  ScreenOne();
       case 1:
         return const ProductsScreen();
       case 2:

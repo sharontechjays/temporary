@@ -47,21 +47,7 @@ class _SignInFormState extends State<SignInForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextFormField(
-            decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color:AppColors.Secondary_purple),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color:AppColors.Secondary_purple),
-              ),
-              labelText: 'Email',
-              labelStyle: TextStyle(color: )
-
-            ),
-            keyboardType: TextInputType.emailAddress,
-            controller: emailController,
-          ),
+          TextFomWWidget(emailController: emailController),
           const SizedBox(height: 16),
           TextFormField(
             decoration: InputDecoration(
@@ -103,7 +89,7 @@ class _SignInFormState extends State<SignInForm> {
                     stops: [0.0, 1.0],
                     tileMode: TileMode.clamp),
               ),
-              child: Center(child: const Text('Sign In')),
+              child: const Center(child: Text('Sign In')),
             ),
           ),
           const SizedBox(height: 16),
@@ -149,5 +135,32 @@ class _SignInFormState extends State<SignInForm> {
     setState(() {
       _isPasswordVisible = !_isPasswordVisible;
     });
+  }
+}
+
+class TextFomWWidget extends StatelessWidget {
+  const TextFomWWidget({
+    super.key,
+    required this.emailController,
+  });
+
+  final TextEditingController emailController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: const InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color:AppColors.Secondary_purple),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color:AppColors.Secondary_purple),
+        ),
+        labelText: 'Email',
+
+      ),
+      keyboardType: TextInputType.emailAddress,
+      controller: emailController,
+    );
   }
 }
