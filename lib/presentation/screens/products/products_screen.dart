@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/data/models/products_model.dart';
 import 'package:test_flutter/presentation/blocs/products/products_bloc.dart';
 import '../../blocs/products/products_event.dart';
 import '../../blocs/products/products_state.dart';
@@ -107,24 +108,7 @@ class _ProductsScreenState extends State<ProductsScreen>
       itemBuilder: (context, index) {
         if (index < state.products.length) {
           final notification = state.products[index];
-          return ExpansionTile(
-            title: Text(notification.title),
-            subtitle: Text(notification.brand),
-            children: [
-              notification.images.isNotEmpty
-                  ? InkWell(
-                      onTap: () {
-                        showCustomDialog(context);
-                      },
-                      child: Image.network(notification.images.first))
-                  : const SizedBox(),
-              InkWell(child: Text("Category: ${notification.category}")),
-              Text("Description: ${notification.description}"),
-              Text("Discount: ${notification.discountPercentage}"),
-              Text("Rating: ${notification.rating}"),
-              Text("Price: ${notification.price}"),
-            ],
-          );
+          return customExtractionTile(notification, context);
         } else if (_productsBloc.isNextLink) {
           return const Center(child: CircularProgressIndicator());
         } else if (_productsBloc.offset == 0 && state.products.isEmpty) {
@@ -135,6 +119,27 @@ class _ProductsScreenState extends State<ProductsScreen>
       },
       separatorBuilder: (context, index) => const Divider(),
     );
+  }
+
+  ExpansionTile customExtractionTile(Products notification, BuildContext context) {
+    return ExpansionTile(
+          title: Text(notification.title),
+          subtitle: Text(notification.brand),
+          children: [
+            notification.images.isNotEmpty
+                ? InkWell(
+                    onTap: () {
+                      showCustomDialog(context);
+                    },
+                    child: Image.network(notification.images.first))
+                : const SizedBox(),
+            InkWell(child: Text("Category: ${notification.category}")),
+            Text("Description: ${notification.description}"),
+            Text("Discount: ${notification.discountPercentage}"),
+            Text("Rating: ${notification.rating}"),
+            Text("Price: ${notification.price}"),
+          ],
+        );
   }
 
   void showCustomDialog(BuildContext context) {
