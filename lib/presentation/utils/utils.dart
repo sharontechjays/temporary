@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 
 class Utils {
-
   String prettyPrint(String input) {
     dynamic json = const JsonDecoder().convert(input);
     return const JsonEncoder.withIndent('  ').convert(json);
@@ -24,7 +23,7 @@ class Utils {
     } else if (Platform.isLinux) {
       return 'Linux';
     } else {
-      return 'Unknown Platformq';
+      return 'Unknown Platform';
     }
   }
 
@@ -34,8 +33,8 @@ class Utils {
       cacheWidth: 100,
       cacheHeight: 100,
       fit: BoxFit.cover,
-      loadingBuilder:
-          (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) return child;
         return const Center(
           child: SizedBox(
@@ -47,7 +46,6 @@ class Utils {
       },
     );
   }
-
 
   Future<String> getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();

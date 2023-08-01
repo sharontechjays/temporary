@@ -1,6 +1,4 @@
-import 'dart:convert';
-import 'dart:ffi';
-import 'dart:math';
+
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +34,7 @@ class RestClient {
         headers['Authorization'] =
             "Bearer ${SharedPreferencesHelper.getDummyToken()}";
         print('Request URl: ${options.method} ${options.uri}');
-        print('Request Body: ${options.data}');
+        print('Request Body: $body');
         if (queryParams != null && queryParams.isNotEmpty) {
           print('Parameters: $queryParams');
         }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/presentation/constants/app_colors.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 
 class CustomOKActionButton extends StatelessWidget {
   final String title;
@@ -8,7 +10,8 @@ class CustomOKActionButton extends StatelessWidget {
   final Function positiveFunction;
   final Function negativeFunction;
 
-  CustomOKActionButton({
+  const CustomOKActionButton({
+    super.key,
     required this.title,
     required this.message,
     required this.positiveLabel,
@@ -28,26 +31,22 @@ class CustomOKActionButton extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
-            mainAxisAlignment: negativeLabel != ""
-                ? MainAxisAlignment.spaceBetween
-                : MainAxisAlignment.center,
             children: <Widget>[
-              TextButton(
-                child: Text(positiveLabel),
-                onPressed: () {
-                  positiveFunction();
-                  Navigator.of(context).pop();
-                },
+              Expanded(
+                  flex: 1,
+                  child: CustomOutlinedButton(
+                    positiveLabel: positiveLabel,
+                    positiveFunction: positiveFunction,
+                    secondaryColor: Colors.deepPurple,
+                  )),
+              const SizedBox(
+                width: 15,
               ),
               Visibility(
                 visible: negativeLabel != "",
-                child: TextButton(
-                  child: Text(negativeLabel),
-                  onPressed: () {
-                    negativeFunction();
-                    Navigator.of(context).pop();
-                  },
-                ),
+                child: CustomElevatedButton(
+                    negativeLabel: negativeLabel,
+                    negativeFunction: negativeFunction),
               ),
             ],
           ),

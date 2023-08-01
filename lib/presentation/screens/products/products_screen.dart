@@ -143,7 +143,7 @@ class _ProductsScreenState extends State<ProductsScreen>
       builder: (BuildContext context) {
         return CustomOKActionButton(
           title: "Custom Dialog Title",
-          message: "This is a custom dialog message.",
+          message: "This will remove their Co-Commissioner abilities, but they will remain in the league as a general member.",
           positiveLabel: "OK",
           // Replace with the label for the positive button
           negativeLabel: "Cancel",
