@@ -41,6 +41,7 @@ dependencies:
   json_annotation:
   provider: ^6.0.5
   shared_preferences: ^2.1.1
+  flutter_toggle_tab:
   fluttertoast: ^8.2.1
   google_fonts: ^5.0.0
   flutter_bloc:

@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 import '../blocs/screenone/toggle_bloc.dart';
 import '../blocs/screenone/toggle_event.dart';
 import '../blocs/screenone/toggle_state.dart';
 import '../blocs/toggleTabs/toggle_bloc.dart';
+
 class ScreenOne extends StatelessWidget {
   const ScreenOne({Key? key}) : super(key: key);
 
@@ -55,8 +57,6 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
     return BlocBuilder<ToggleBloc, ToggleState>(
       builder: (context, toggleState) {
         int numTabs = toggleState == ToggleState.OFF ? 3 : 4;
-
-        // Update the TabController's length when the number of tabs changes
         if (_tabController.length != numTabs) {
           _tabController.dispose();
           _tabController = TabController(length: numTabs, vsync: this);
@@ -65,13 +65,17 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CupertinoButton(
-              child: Text(
-                toggleState == ToggleState.ON ? 'Show 4 Tabs' : 'Show 3 Tabs',
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AnimatedToggle(
+                  values: const ['Show 4 Tabs', 'Show 3 Tabs'],
+                  onToggleCallback: (index) {
+                    context.read<ToggleBloc>().add(ToggleButtonPressed());
+                  },
+                ),
               ),
-              onPressed: () {
-                context.read<ToggleBloc>().add(ToggleButtonPressed());
-              },
             ),
             Expanded(
               child: BlocProvider.value(
@@ -88,9 +92,6 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
     );
   }
 }
-
-
-
 
 class TabViewWidget extends StatelessWidget {
   final int numTabs;
@@ -110,7 +111,7 @@ class TabViewWidget extends StatelessWidget {
           controller: tabController,
           tabs: List.generate(
             numTabs,
-                (index) => Tab(text: 'Tab ${index + 1}'),
+            (index) => Tab(text: 'Tab ${index + 1}'),
           ),
           onTap: (index) {
             context.read<TabToggleBloc>().add(TabSelected(index));
@@ -119,15 +120,14 @@ class TabViewWidget extends StatelessWidget {
         Expanded(
           child: TabBarView(
             controller: tabController,
+            physics: const NeverScrollableScrollPhysics(),
             children: List.generate(
               numTabs,
-                  (index) => Center(child: Text('Content of Tab ${index + 1}')),
+              (index) => Center(child: Text('Content of Tab ${index + 1}')),
             ),
-            physics: const NeverScrollableScrollPhysics(),
           ),
         ),
       ],
     );
   }
 }
-
