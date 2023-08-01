@@ -73,8 +73,8 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
               },
             ),
             Expanded(
-              child: BlocProvider.value( // Use BlocProvider.value here
-                value: BlocProvider.of<TabToggleBloc>(context), // Provide the existing TabToggleBloc
+              child: BlocProvider.value(
+                value: BlocProvider.of<TabToggleBloc>(context),
                 child: TabViewWidget(
                   numTabs: numTabs,
                   tabController: _tabController,
