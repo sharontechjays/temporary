@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/presentation/screens/homepage.dart';
 import 'app_theme.dart';
 import 'presentation/screens/sign_in_screen.dart';
 
@@ -15,10 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Base setup',
-      navigatorKey: navKey,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData(),
-      home: const SignInScreen(),
+      home: const HomePage(),
     );
   }
 }

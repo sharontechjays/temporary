@@ -11,15 +11,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<NavigationBloc>(
-            create: (context) => NavigationBloc(),
-          ),
-        ],
-        child: const HomePageManager(),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NavigationBloc>(
+          create: (context) => NavigationBloc(),
+        ),
+      ],
+      child: const HomePageManager(),
     );
   }
 }
@@ -70,7 +68,7 @@ class HomePageManager extends StatelessWidget {
   Widget _buildCurrentScreen(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return  ScreenOne();
+        return ScreenOne();
       case 1:
         return const ProductsScreen();
       case 2:
