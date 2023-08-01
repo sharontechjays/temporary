@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/presentation/constants/app_colors.dart';
 
-
 class AppTheme {
   static ThemeData themeData() {
     const MaterialColor mamaPink = MaterialColor(
@@ -26,11 +25,10 @@ class AppTheme {
       // Colors.pinkAccent,
       // ignore: unrelated_type_equality_checks
       primaryColorLight: AppColors.Secondary_purple,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       splashColor: const Color(0xFF302b63),
       primarySwatch: mamaPink,
       scaffoldBackgroundColor: Colors.white,
-      fontFamily: 'Poppins',
       buttonTheme: const ButtonThemeData(
         buttonColor: AppColors.splash_blue,
       ),
@@ -38,24 +36,25 @@ class AppTheme {
   }
 
   static ThemeData calendarThemeData() => themeData().copyWith(
-    hintColor: themeData().primaryColor,
-  );
+        hintColor: themeData().primaryColor,
+      );
 
   static ThemeData antenatalThemeData() => themeData().copyWith(
-    tabBarTheme: TabBarTheme(
-        labelColor: themeData().primaryColor,
+        tabBarTheme: TabBarTheme(
+            labelColor: themeData().primaryColor,
             labelStyle: TextStyle(
-          fontSize: 18,
-          color: themeData().primaryColor,
-        ),
-        indicator: UnderlineTabIndicator(
-            borderSide:
-            BorderSide(width: 2, color: themeData().primaryColor),
-            insets: const EdgeInsets.symmetric(horizontal: 10)),
-        unselectedLabelColor: const Color(0x4d000000),
-        labelPadding: const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: 18,
-        )),
-  );
+              fontSize: 18,
+              color: themeData().primaryColor,
+            ),
+            indicator: UnderlineTabIndicator(
+                borderSide:
+                    BorderSide(width: 2, color: themeData().primaryColor),
+                insets: const EdgeInsets.symmetric(horizontal: 10)),
+            unselectedLabelColor: const Color(0x4d000000),
+            labelPadding:
+                const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 18,
+            )),
+      );
 }
