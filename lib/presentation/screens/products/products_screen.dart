@@ -121,33 +121,33 @@ class _ProductsScreenState extends State<ProductsScreen>
     );
   }
 
-  ExpansionTile customExtractionTile(Products notification, BuildContext context) {
+  ExpansionTile customExtractionTile(Products products, BuildContext context) {
     return ExpansionTile(
-          title: Text(notification.title),
-          subtitle: Text(notification.brand),
+          title: Text(products.title),
+          subtitle: Text(products.brand),
           children: [
-            notification.images.isNotEmpty
+            products.images.isNotEmpty
                 ? InkWell(
                     onTap: () {
-                      showCustomDialog(context);
+                      showCustomDialog(context,products);
                     },
-                    child: Image.network(notification.images.first))
+                    child: Image.network(products.images.first))
                 : const SizedBox(),
-            InkWell(child: Text("Category: ${notification.category}")),
-            Text("Description: ${notification.description}"),
-            Text("Discount: ${notification.discountPercentage}"),
-            Text("Rating: ${notification.rating}"),
-            Text("Price: ${notification.price}"),
+            InkWell(child: Text("Category: ${products.category}")),
+            Text("Description: ${products.description}"),
+            Text("Discount: ${products.discountPercentage}"),
+            Text("Rating: ${products.rating}"),
+            Text("Price: ${products.price}"),
           ],
         );
   }
 
-  void showCustomDialog(BuildContext context) {
+  void showCustomDialog(BuildContext context,Products products) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return CustomOKActionButton(
-          title: "Custom Dialog Title",
+          title: "Custom Dialog ${products.brand}",
           message: "This will remove their Co-Commissioner abilities, but they will remain in the league as a general member.",
           positiveLabel: "OK",
           // Replace with the label for the positive button
