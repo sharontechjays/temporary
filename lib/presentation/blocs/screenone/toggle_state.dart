@@ -1,0 +1,1 @@
+enum ToggleState { OFF, ON }

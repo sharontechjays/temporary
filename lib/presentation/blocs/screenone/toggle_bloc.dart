@@ -1,11 +1,10 @@
 // toggle_bloc.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/presentation/blocs/screenone/toggle_event.dart';
+import 'package:test_flutter/presentation/blocs/screenone/toggle_state.dart';
 
-enum ToggleState { OFF, ON }
 
-abstract class ToggleEvent {}
 
-class ToggleButtonPressed extends ToggleEvent {}
 
 class ToggleBloc extends Bloc<ToggleEvent, ToggleState> {
   ToggleBloc() : super(ToggleState.OFF) {

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../blocs/screenone/screenone_bloc.dart';
+import '../blocs/screenone/toggle_bloc.dart';
+import '../blocs/screenone/toggle_event.dart';
+import '../blocs/screenone/toggle_state.dart';
 import '../blocs/toggleTabs/toggle_bloc.dart';
 class ScreenOne extends StatelessWidget {
   const ScreenOne({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class ScreenOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Toggle Button Design'),
+        title: const Text('Toggle Button Design'),
       ),
       body: MultiBlocProvider(
         providers: [
