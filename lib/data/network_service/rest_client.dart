@@ -28,7 +28,6 @@ class RestClient {
         final body = options.data;
 
         headers['Content-Type'] = "application/json";
-        headers['device'] = Utils().getDeviceId();
         headers['platform'] = Utils().getPlatformName();
         SharedPreferencesHelper.init();
         headers['Authorization'] =

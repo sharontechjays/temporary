@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 
@@ -47,7 +46,7 @@ class Utils {
     );
   }
 
-  Future<String> getDeviceId() async {
+/*  Future<String> getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -59,4 +58,6 @@ class Utils {
       throw UnsupportedError('Unsupported platform');
     }
   }
+}*/
+
 }
