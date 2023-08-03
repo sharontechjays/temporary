@@ -1,4 +1,9 @@
-class LoginModel {
+
+
+import 'package:json_annotation/json_annotation.dart';
+part 'login_model.g.dart';
+@JsonSerializable()
+/*class LoginModel {
   LoginModel({
     required this.id,
     required this.username,
@@ -19,7 +24,7 @@ class LoginModel {
   late final String image;
   late final String token;
 
-  LoginModel.fromJson(Map<String, dynamic> json) {
+  *//*LoginModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
     email = json['email'];
@@ -31,15 +36,62 @@ class LoginModel {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['username'] = username;
-    _data['email'] = email;
-    _data['firstName'] = firstName;
-    _data['lastName'] = lastName;
-    _data['gender'] = gender;
-    _data['image'] = image;
-    _data['token'] = token;
-    return _data;
-  }
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['username'] = username;
+    data['email'] = email;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['gender'] = gender;
+    data['image'] = image;
+    data['token'] = token;
+    return data;
+  }*//*
+  factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
+  Map<String, dynamic> toJson() => _$LoginModelToJson(this);
+}*/
+
+@JsonSerializable(explicitToJson: true)
+class LoginModel {
+  @JsonKey(required: true)
+  final int id;
+
+  @JsonKey(required: true)
+  final String username;
+
+  @JsonKey(required: true)
+  final String email;
+
+  @JsonKey(required: true)
+  final String firstName;
+
+  @JsonKey(required: true)
+  final String lastName;
+
+  @JsonKey(required: true)
+  final String gender;
+
+  @JsonKey(required: true)
+  final String image;
+
+  @JsonKey(required: true)
+  final String token;
+
+  LoginModel({
+    required this.id,
+    required this.username,
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    required this.gender,
+    required this.image,
+    required this.token,
+  });
+
+  // Factory constructor to parse JSON to LoginModel
+  factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
+
+  // Factory constructor to convert LoginModel to JSON
+  Map<String, dynamic> toJson() => _$LoginModelToJson(this);
 }
+
