@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:test_flutter/data/models/login_model.dart';
 
 abstract class SignInState extends Equatable {
   @override
@@ -10,7 +11,7 @@ class SignInInitial extends SignInState {}
 class SignInLoading extends SignInState {}
 
 class SignInSuccess extends SignInState {
-  final String message;
+  final LoginModel message;
 
   SignInSuccess({required this.message});
 

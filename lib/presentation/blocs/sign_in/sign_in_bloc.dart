@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/services/login_services.dart';
 import 'sign_in_event.dart';
@@ -16,7 +17,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(SignInLoading());
       var result = await LoginServices().loginUser(event.email, event.password);
       if (result.result) {
-        emit(SignInSuccess(message: result.data!.token));
+        emit(SignInSuccess(message: result.data!));
       } else {
         emit(SignInFailure(error: result.msg));
       }

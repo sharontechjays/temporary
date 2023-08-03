@@ -97,7 +97,7 @@ class _SignInFormState extends State<SignInForm> {
             listener: (context, state) {
               if (state is SignInSuccess) {
                 SharedPreferencesHelper.init();
-                SharedPreferencesHelper.setDummyToken(state.message);
+                SharedPreferencesHelper.setDummyToken(state.message.token);
                 print(state.message);
                 Navigator.pushReplacement(
                   context,
