@@ -68,9 +68,9 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: AnimatedToggle(
-                  values: const ['Show 4 Tabs', 'Show 3 Tabs'],
+                  values: const ['My Picks', 'Scoreboard'],
                   onToggleCallback: (index) {
                     context.read<ToggleBloc>().add(ToggleButtonPressed());
                   },

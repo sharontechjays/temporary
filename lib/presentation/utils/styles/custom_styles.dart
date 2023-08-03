@@ -61,7 +61,7 @@ class CustomElevatedButton extends StatelessWidget {
 
 class AnimatedToggle extends StatefulWidget {
   final List<String> values;
-  final ValueChanged<int> onToggleCallback;
+  final Function(int) onToggleCallback;
   final Color backgroundColor;
   final Color buttonColor;
   final Color textColor;
@@ -92,7 +92,7 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
         color: widget.backgroundColor,
       ),
       child: FlutterToggleTab(
-        width: MediaQuery.of(context).size.width * 0.25-2,
+        width: MediaQuery.of(context).size.width * 0.25,
         height: 50,
         borderRadius: 10.0,
         selectedIndex: selectedIndex,
@@ -104,8 +104,11 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
         labels: widget.values,
         selectedLabelIndex: (index) {
           setState(() {
-            selectedIndex = index;
+            if (selectedIndex != index) {
+              selectedIndex = index;
+            }
           });
+
           widget.onToggleCallback(index);
         },
         isScroll: true,

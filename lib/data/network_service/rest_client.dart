@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 import 'package:test_flutter/data/models/api_response.dart';
@@ -14,6 +16,7 @@ class RestClient {
   }
 
   RestClient._internal() : _dio = Dio() {
+    final startTime = DateTime.now();
     _dio.interceptors.add(
       InterceptorsWrapper(onRequest: (options, handler) async {
         options.connectTimeout = const Duration(seconds: 6);
@@ -23,26 +26,30 @@ class RestClient {
         final queryParams = options.queryParameters;
         final headers = options.headers;
         final body = options.data;
+
         headers['Content-Type'] = "application/json";
         headers['device'] = Utils().getDeviceId();
         headers['platform'] = Utils().getPlatformName();
         SharedPreferencesHelper.init();
         headers['Authorization'] =
-        "Bearer ${SharedPreferencesHelper.getDummyToken()}";
-        print('Request URl: ${options.method} ${options.uri}');
-        print('Request Body: $body');
+            "Bearer ${SharedPreferencesHelper.getDummyToken()}";
+        log('Request URl: ${options.method} ${options.uri}');
+        log('Request Body: $body');
         if (queryParams != null && queryParams.isNotEmpty) {
-          print('Parameters: $queryParams');
+          log('Parameters: $queryParams');
         }
         return handler.next(options);
       }, onResponse: (response, handler) {
-        print("StatusCode : ${response.statusCode}");
+        final endTime = DateTime.now();
+        final responseTime = endTime.difference(startTime);
+        log("StatusCode : ${response.statusCode}");
+        log('Response Time: ${responseTime.inMilliseconds} ms');
         if (response.statusCode == 200) {
-          print("Response body : ${response.data}");
+          log("Response body : ${response.data}");
           return handler.resolve(response);
         } else {
-          print("Response status code: ${response.statusCode}");
-          print("Response body : ${response.data}");
+          log("Response status code: ${response.statusCode}");
+          log("Response body : ${response.data}");
           final errorResponse = Response(
             statusCode: response.statusCode,
             data: response.data,
@@ -129,9 +136,11 @@ class RestClient {
     }
   }
 
-  Future<Response> uploadFileWithProgress(String filePath,
-      String endpoint,
-      Function(int sentBytes, int totalBytes) progressCallback,) async {
+  Future<Response> uploadFileWithProgress(
+    String filePath,
+    String endpoint,
+    Function(int sentBytes, int totalBytes) progressCallback,
+  ) async {
     final url = _constructUrl(endpoint);
 
     final formData = FormData.fromMap({
@@ -150,8 +159,10 @@ class RestClient {
   }
 }
 
-ApiResponse<T> handleResponse<T>(Response<dynamic> response,
-    T Function(Map<String, dynamic>) fromJson,) {
+ApiResponse<T> handleResponse<T>(
+  Response<dynamic> response,
+  T Function(Map<String, dynamic>) fromJson,
+) {
   if (response.statusCode == 200) {
     return ApiResponse<T>(
       data: fromJson(response.data),
