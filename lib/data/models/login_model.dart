@@ -86,11 +86,8 @@ class LoginModel {
     required this.image,
     required this.token,
   });
-
-  // Factory constructor to parse JSON to LoginModel
   factory LoginModel.fromJson(Map<String, dynamic> json) =>
       _$LoginModelFromJson(json);
 
-  // Factory constructor to convert LoginModel to JSON
   Map<String, dynamic> toJson() => _$LoginModelToJson(this);
 }
