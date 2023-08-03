@@ -6,31 +6,16 @@ part of 'login_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginModel _$LoginModelFromJson(Map<String, dynamic> json) {
-  $checkKeys(
-    json,
-    requiredKeys: const [
-      'id',
-      'username',
-      'email',
-      'firstName',
-      'lastName',
-      'gender',
-      'image',
-      'token'
-    ],
-  );
-  return LoginModel(
-    id: json['id'] as int,
-    username: json['username'] as String,
-    email: json['email'] as String,
-    firstName: json['firstName'] as String,
-    lastName: json['lastName'] as String,
-    gender: json['gender'] as String,
-    image: json['image'] as String,
-    token: json['token'] as String,
-  );
-}
+LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
+      id: json['id'] as int,
+      username: json['username'] as String,
+      email: json['email'] as String,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      gender: json['gender'] as String,
+      image: json['image'] as String,
+      token: json['token'] as String,
+    );
 
 Map<String, dynamic> _$LoginModelToJson(LoginModel instance) =>
     <String, dynamic>{

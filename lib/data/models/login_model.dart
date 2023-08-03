@@ -1,7 +1,7 @@
-
-
 import 'package:json_annotation/json_annotation.dart';
+
 part 'login_model.g.dart';
+
 @JsonSerializable()
 /*class LoginModel {
   LoginModel({
@@ -24,7 +24,7 @@ part 'login_model.g.dart';
   late final String image;
   late final String token;
 
-  *//*LoginModel.fromJson(Map<String, dynamic> json) {
+  */ /*LoginModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
     email = json['email'];
@@ -46,35 +46,34 @@ part 'login_model.g.dart';
     data['image'] = image;
     data['token'] = token;
     return data;
-  }*//*
+  }*/ /*
   factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
   Map<String, dynamic> toJson() => _$LoginModelToJson(this);
 }*/
-
 @JsonSerializable(explicitToJson: true)
 class LoginModel {
-  @JsonKey(required: true)
+  @JsonKey(name: 'id')
   final int id;
 
-  @JsonKey(required: true)
+  @JsonKey(name: 'username')
   final String username;
 
-  @JsonKey(required: true)
+  @JsonKey(name: 'email')
   final String email;
 
-  @JsonKey(required: true)
+  @JsonKey(name: 'firstName')
   final String firstName;
 
-  @JsonKey(required: true)
+  @JsonKey(name: 'lastName')
   final String lastName;
 
-  @JsonKey(required: true)
+  @JsonKey(name: 'gender')
   final String gender;
 
-  @JsonKey(required: true)
+  @JsonKey(name: 'image')
   final String image;
 
-  @JsonKey(required: true)
+  @JsonKey(name: 'token')
   final String token;
 
   LoginModel({
@@ -89,9 +88,9 @@ class LoginModel {
   });
 
   // Factory constructor to parse JSON to LoginModel
-  factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
+  factory LoginModel.fromJson(Map<String, dynamic> json) =>
+      _$LoginModelFromJson(json);
 
   // Factory constructor to convert LoginModel to JSON
   Map<String, dynamic> toJson() => _$LoginModelToJson(this);
 }
-
