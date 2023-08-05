@@ -1,6 +1,6 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 
@@ -19,8 +19,8 @@ class SignInScreen extends StatelessWidget {
         title: const Text('Sign In'),
       ),
       body: BlocProvider(
-        create: (context) => SignInBloc(),
-        child: SignInForm(),
+        create: (_) => SignInBloc(),
+        child: const SignInForm(),
       ),
     );
   }
@@ -34,8 +34,8 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
 
   @override
@@ -47,47 +47,61 @@ class _SignInFormState extends State<SignInForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextFomWWidget(emailController: emailController),
+          TextFormField(
+            decoration: const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.Secondary_purple),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.Secondary_purple),
+              ),
+              labelText: 'Email',
+            ),
+            keyboardType: TextInputType.emailAddress,
+            controller: _emailController,
+          ),
           const SizedBox(height: 16),
           TextFormField(
             decoration: InputDecoration(
               enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color:AppColors.Secondary_purple),
+                borderSide: BorderSide(color: AppColors.Secondary_purple),
               ),
               focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color:AppColors.Secondary_purple),
+                borderSide: BorderSide(color: AppColors.Secondary_purple),
               ),
-                suffixIcon: IconButton(
-                  icon: _isPasswordVisible
-                      ? const Icon(Icons.visibility_off)
-                      : const Icon(Icons.visibility),
-                  onPressed: _togglePasswordVisibility,
-                )
-                ,
+              suffixIcon: IconButton(
+                icon: _isPasswordVisible
+                    ? const Icon(Icons.visibility_off)
+                    : const Icon(Icons.visibility),
+                onPressed: _togglePasswordVisibility,
+              ),
               labelText: 'Password',
-
             ),
             obscureText: !_isPasswordVisible,
-            controller: passwordController,
+            controller: _passwordController,
           ),
           const SizedBox(height: 24),
           InkWell(
-            onTap: (){
+            onTap: () {
               bloc.add(SignInButtonPressed(
-                email: emailController.text,
-                password: passwordController.text,
+                email: _emailController.text,
+                password: _passwordController.text,
               ));
             },
             child: Container(
               height: 50,
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 gradient: const LinearGradient(
-                    colors: [AppColors.Primary_purple, AppColors.Secondary_purple],
-                    begin: FractionalOffset(0.0, 0.0),
-                    end: FractionalOffset(0.5, 0.0),
-                    stops: [0.0, 1.0],
-                    tileMode: TileMode.clamp),
+                  colors: [
+                    AppColors.Primary_purple,
+                    AppColors.Secondary_purple,
+                  ],
+                  begin: FractionalOffset(0.0, 0.0),
+                  end: FractionalOffset(0.5, 0.0),
+                  stops: [0.0, 1.0],
+                  tileMode: TileMode.clamp,
+                ),
               ),
               child: const Center(child: Text('Sign In')),
             ),
@@ -98,14 +112,13 @@ class _SignInFormState extends State<SignInForm> {
               if (state is SignInSuccess) {
                 SharedPreferencesHelper.init();
                 SharedPreferencesHelper.setDummyToken(state.message.token);
-                print(state.message);
+                debugPrint(state.message.email);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const HomePage()),
                 );
-              }
-              if (state is SignInFailure) {
-                clearForm(context);
+              } else if (state is SignInFailure) {
+                _clearForm(context);
               }
             },
             child: BlocBuilder<SignInBloc, SignInState>(
@@ -125,9 +138,9 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
-  void clearForm(BuildContext context) {
-    emailController.clear();
-    passwordController.clear();
+  void _clearForm(BuildContext context) {
+    _emailController.clear();
+    _passwordController.clear();
     FocusScope.of(context).unfocus();
   }
 
@@ -135,32 +148,5 @@ class _SignInFormState extends State<SignInForm> {
     setState(() {
       _isPasswordVisible = !_isPasswordVisible;
     });
-  }
-}
-
-class TextFomWWidget extends StatelessWidget {
-  const TextFomWWidget({
-    super.key,
-    required this.emailController,
-  });
-
-  final TextEditingController emailController;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: const InputDecoration(
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color:AppColors.Secondary_purple),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color:AppColors.Secondary_purple),
-        ),
-        labelText: 'Email',
-
-      ),
-      keyboardType: TextInputType.emailAddress,
-      controller: emailController,
-    );
   }
 }
