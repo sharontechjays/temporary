@@ -5,7 +5,7 @@ import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 import 'package:test_flutter/data/models/api_response.dart';
 import 'package:test_flutter/presentation/utils/utils.dart';
 
-import '../../presentation/constants/constants.dart';
+import '../../presentation/constants/environment.dart';
 
 class RestClient {
   static final RestClient _instance = RestClient._internal();
