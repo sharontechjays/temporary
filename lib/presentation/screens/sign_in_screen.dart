@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
-import 'package:test_flutter/presentation/constants/app_colors.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 
 import '../blocs/sign_in/sign_in_bloc.dart';
 import '../blocs/sign_in/sign_in_event.dart';
