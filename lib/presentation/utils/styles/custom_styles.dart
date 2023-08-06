@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   const CustomOutlinedButton(
@@ -59,9 +60,9 @@ class CustomElevatedButton extends StatelessWidget {
   }
 }
 
-class AnimatedToggle extends StatefulWidget {
+class AnimatedToggle extends StatelessWidget {
   final List<String> values;
-  final Function(int) onToggleCallback;
+  final ValueChanged<int> onToggleCallback;
   final Color backgroundColor;
   final Color buttonColor;
   final Color textColor;
@@ -76,45 +77,46 @@ class AnimatedToggle extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AnimatedToggleState createState() => _AnimatedToggleState();
-}
-
-class _AnimatedToggleState extends State<AnimatedToggle> {
-  int selectedIndex = 0;
-
-
-  @override
   Widget build(BuildContext context) {
-    double totalWidth= MediaQuery.of(context).size.width;
-    return Container(
-      height: 48,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: widget.backgroundColor,
-      ),
-      child: FlutterToggleTab(
-        width: (totalWidth-10) * 0.25,
+    return DefaultTabController(
+      length: values.length,
+      child: Container(
         height: 50,
-        borderRadius: 10.0,
-        selectedIndex: selectedIndex,
-        selectedBackgroundColors: const [Colors.blue, Colors.blueAccent],
-        selectedTextStyle: const TextStyle(
-            color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
-        unSelectedTextStyle: const TextStyle(
-            color: Colors.black87, fontSize: 13, fontWeight: FontWeight.w500),
-        labels: widget.values,
-        selectedLabelIndex: (index) {
-          setState(() {
-            if (selectedIndex != index) {
-              selectedIndex = index;
-              widget.onToggleCallback(index);
-            }
-          });
-
-
-        },
-        isScroll: true,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: backgroundColor,
+        ),
+        child: Expanded(
+          // Wrap TabBar with Expanded
+          child: TabBar(
+            tabs: List.generate(
+              values.length,
+              (index) => Tab(
+                child: Text(
+                  values[index],
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            onTap: (index) => onToggleCallback(index),
+            indicatorColor: AppColors.Secondary_purple,
+            labelColor: AppColors.Secondary_purple,
+            unselectedLabelColor: Colors.black87,
+            labelStyle:
+                const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+            unselectedLabelStyle:
+                const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color:  AppColors.Secondary_purple,
+            ),
+          ),
+        ),
       ),
     );
   }

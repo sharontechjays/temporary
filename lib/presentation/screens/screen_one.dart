@@ -13,6 +13,7 @@ class ScreenOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text('Toggle Button Design'),
       ),
@@ -110,6 +111,7 @@ class TabViewWidget extends StatelessWidget {
         TabBar(
           controller: tabController,
           labelStyle: const TextStyle(color: AppColors.Secondary_purple),
+          unselectedLabelColor: AppColors.Secondary_purple,
           tabs: List.generate(
             numTabs,
             (index) => Tab(text: 'Tab ${index + 1}'),
