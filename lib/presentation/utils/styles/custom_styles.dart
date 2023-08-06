@@ -82,8 +82,10 @@ class AnimatedToggle extends StatefulWidget {
 class _AnimatedToggleState extends State<AnimatedToggle> {
   int selectedIndex = 0;
 
+
   @override
   Widget build(BuildContext context) {
+    double totalWidth= MediaQuery.of(context).size.width;
     return Container(
       height: 48,
       width: double.infinity,
@@ -92,7 +94,7 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
         color: widget.backgroundColor,
       ),
       child: FlutterToggleTab(
-        width: MediaQuery.of(context).size.width * 0.25,
+        width: (totalWidth-10) * 0.25,
         height: 50,
         borderRadius: 10.0,
         selectedIndex: selectedIndex,
@@ -106,10 +108,11 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
           setState(() {
             if (selectedIndex != index) {
               selectedIndex = index;
+              widget.onToggleCallback(index);
             }
           });
 
-          widget.onToggleCallback(index);
+
         },
         isScroll: true,
       ),

@@ -71,7 +71,7 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
                 child: AnimatedToggle(
                   values: const ['My Picks', 'Scoreboard'],
                   onToggleCallback: (index) {
-                    context.read<ToggleBloc>().add(ToggleButtonPressed());
+                    context.read<ToggleBloc>().add(ToggleButtonPressed(index));
                   },
                 ),
               ),
