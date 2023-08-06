@@ -14,8 +14,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     if (event is SignInButtonPressed) {
       emit(SignInLoading());
-      if (event.email.isEmpty || event.password.isEmpty) {
-        emit(SignInFailure(error: "Username/password is empty"));
+      if (_isValidated(event).isNotEmpty) {
+        emit(SignInFailure(error: _isValidated(event)));
       } else {
         var result =
             await LoginServices().loginUser(event.email, event.password);
@@ -26,5 +26,15 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         }
       }
     }
+  }
+
+  String _isValidated(SignInButtonPressed event) {
+    String validationString = "";
+    if (event.email.isEmpty || event.password.isEmpty) {
+      validationString = "username/ password is empty";
+    } else if (event.email.length < 6 || event.password.length < 6) {
+      validationString = "email and password should contain more than 5 characters";
+    } else {}
+    return validationString;
   }
 }
