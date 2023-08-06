@@ -14,11 +14,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     if (event is SignInButtonPressed) {
       emit(SignInLoading());
-      var result = await LoginServices().loginUser(event.email, event.password);
-      if (result.result) {
-        emit(SignInSuccess(message: result.data!));
+      if (event.email.isEmpty || event.password.isEmpty) {
+        emit(SignInFailure(error: "Username/password is empty"));
       } else {
-        emit(SignInFailure(error: result.msg));
+        var result =
+            await LoginServices().loginUser(event.email, event.password);
+        if (result.result) {
+          emit(SignInSuccess(message: result.data!));
+        } else {
+          emit(SignInFailure(error: result.msg));
+        }
       }
     }
   }
