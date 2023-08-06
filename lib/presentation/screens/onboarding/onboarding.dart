@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -12,9 +15,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int _currentPage = 0;
   int numOfTabs = 4;
 
-  final List<String> titles = ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'];
+  final List<String> titles = [
+    'Welcome to my custom App',
+    'Tab 2',
+    'Tab 3',
+    'Tab 4'
+  ];
   final List<String> descriptions = [
-    'This is the first tab description.',
+    'Play fantasy games for all of your favorite reality TV shows in one centralized location.',
     'This is the second tab description.',
     'This is the third tab description.',
     'This is the fourth tab description.',
@@ -71,7 +79,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          color: _currentPage >= index ? Colors.white : Colors.white.withOpacity(0.50),
+          color: _currentPage >= index
+              ? Colors.white
+              : Colors.white.withOpacity(0.50),
         ),
       ),
     );
@@ -126,6 +136,22 @@ class OnBoardingPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                MyMaterialButton(onClickButton: newFunction),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: const Center(
+                        child: Text(
+                      'Login with existing account',
+                      style: TextStyle(
+                        color: AppColors.Secondary_purple,
+                      ),
+                    ))),
               ],
             ),
           )
@@ -133,4 +159,12 @@ class OnBoardingPage extends StatelessWidget {
       ),
     );
   }
+
+  void newFunction(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const SignInScreen()),
+    );
+  }
+
 }

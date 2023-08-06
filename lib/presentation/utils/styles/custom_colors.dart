@@ -3,10 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors {
-
   static const Color chilli = Color(0xffFD003A);
-  static const Color Primary_purple = Color(0xff8980F1);
-  static const Color Secondary_purple = Color(0xff5B51CF);
+  static const Color Secondary_purple = Color(0xff8980F1);
+  static const Color Primary_purple = Color(0xff5B51CF);
   static final Color light_gold = Colors.amber.withOpacity(0.5);
   static const Color splash_blue = Color(0xff325CF0);
   static const Color edit_text_bg = Color(0xffF4F6FA);

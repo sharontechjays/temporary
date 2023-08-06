@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Base setup',
       debugShowCheckedModeBanner: false,
-      home: SignInScreen(),
+      home: OnBoardingScreen(),
     );
   }
 }
