@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 import '../blocs/screenone/toggle_bloc.dart';
 import '../blocs/screenone/toggle_event.dart';
@@ -108,6 +109,7 @@ class TabViewWidget extends StatelessWidget {
       children: [
         TabBar(
           controller: tabController,
+          labelStyle: const TextStyle(color: AppColors.Secondary_purple),
           tabs: List.generate(
             numTabs,
             (index) => Tab(text: 'Tab ${index + 1}'),

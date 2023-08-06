@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 import 'package:test_flutter/data/models/api_response.dart';
 import 'package:test_flutter/presentation/utils/utils.dart';
@@ -70,10 +71,14 @@ class RestClient {
 
   String _constructUrl(String endpoint,
       {Map<String, dynamic>? queryParameters}) {
+
     String url = BASE_URL + endpoint;
     if (queryParameters != null && queryParameters.isNotEmpty) {
       url += '?';
       url += Uri(queryParameters: queryParameters).query;
+    }
+    if (kDebugMode) {
+      print("url:$url");
     }
     return url;
   }
@@ -181,7 +186,9 @@ ApiResponse<T> handleResponse<T>(
 
 ApiResponse<T> handleErrorResponse<T>(dynamic error) {
   if (error is DioException && error.response != null) {
-    print(error.response);
+    if (kDebugMode) {
+      print(error.response);
+    }
     return ApiResponse<T>(
       result: false,
       data: null,
@@ -189,11 +196,19 @@ ApiResponse<T> handleErrorResponse<T>(dynamic error) {
       statusCode: error.response!.statusCode!,
       responseData: error.response!.data,
     );
-  } else {
+  } else if(error is DioException) {
     return ApiResponse<T>(
       result: false,
-      msg: "Error occurred",
+      msg: error.response!.statusCode!.toString(),
       data: null,
     );
   }
+  else
+    {
+      return ApiResponse<T>(
+        result: false,
+        msg: "Error Occured",
+        data: null,
+      );
+    }
 }
