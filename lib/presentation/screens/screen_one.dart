@@ -57,7 +57,7 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
   Widget build(BuildContext context) {
     return BlocBuilder<ToggleBloc, ToggleState>(
       builder: (context, toggleState) {
-        int numTabs = toggleState == ToggleState.OFF ? 3 : 4;
+        int numTabs = toggleState == ToggleState.state1 ? 3 : 4;
         if (_tabController.length != numTabs) {
           _tabController.dispose();
           _tabController = TabController(length: numTabs, vsync: this);

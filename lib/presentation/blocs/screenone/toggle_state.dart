@@ -1,1 +1,1 @@
-enum ToggleState { OFF, ON }
+enum ToggleState { state1, state2 }
