@@ -33,7 +33,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     if (event.email.isEmpty || event.password.isEmpty) {
       validationString = "username/ password is empty";
     } else if (event.email.length < 6 || event.password.length < 6) {
-      validationString = "email and password should contain more than 5 characters";
+      validationString =
+          "email and password should contain more than 6 characters";
     } else {}
     return validationString;
   }
