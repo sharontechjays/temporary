@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
