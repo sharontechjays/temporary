@@ -127,34 +127,31 @@ class AnimatedToggle extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: backgroundColor,
         ),
-        child: Expanded(
-          // Wrap TabBar with Expanded
-          child: TabBar(
-            tabs: List.generate(
-              values.length,
-              (index) => Tab(
-                child: Text(
-                  values[index],
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
+        child: TabBar(
+          tabs: List.generate(
+            values.length,
+            (index) => Tab(
+              child: Text(
+                values[index],
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            onTap: (index) => onToggleCallback(index),
-            indicatorColor: AppColors.Secondary_purple,
-            labelColor: AppColors.Secondary_purple,
-            unselectedLabelColor: Colors.black87,
-            labelStyle:
-                const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-            unselectedLabelStyle:
-                const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-            indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColors.Secondary_purple,
-            ),
+          ),
+          onTap: (index) => onToggleCallback(index),
+          indicatorColor: AppColors.Secondary_purple,
+          labelColor: AppColors.Secondary_purple,
+          unselectedLabelColor: Colors.black87,
+          labelStyle:
+              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          unselectedLabelStyle:
+              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          indicator: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.Secondary_purple,
           ),
         ),
       ),
