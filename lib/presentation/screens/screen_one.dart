@@ -44,7 +44,7 @@ class _ToggleWithTabsState extends State<_ToggleWithTabs>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 0, vsync: this);
   }
 
   @override
@@ -110,8 +110,8 @@ class TabViewWidget extends StatelessWidget {
       children: [
         TabBar(
           controller: tabController,
-          labelStyle: const TextStyle(color: AppColors.Secondary_purple),
-          unselectedLabelColor: AppColors.Secondary_purple,
+          labelStyle: const TextStyle(color: AppColors.secondaryColor),
+          unselectedLabelColor: AppColors.secondaryColor,
           tabs: List.generate(
             numTabs,
             (index) => Tab(text: 'Tab ${index + 1}'),

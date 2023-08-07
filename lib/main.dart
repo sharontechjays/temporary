@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/app_theme.dart';
 import 'package:test_flutter/presentation/screens/homepage.dart';
 import 'package:test_flutter/presentation/screens/onboarding/onboarding.dart';
 import 'presentation/screens/sign_in_screen.dart';
@@ -14,10 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: 'Base setup',
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      home: const OnBoardingScreen(),
+      theme:AppTheme.themeData(context)
     );
   }
 }

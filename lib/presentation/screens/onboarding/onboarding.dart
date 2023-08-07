@@ -31,7 +31,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           children: [
@@ -149,7 +148,7 @@ class OnBoardingPage extends StatelessWidget {
                         child: Text(
                       'Login with existing account',
                       style: TextStyle(
-                        color: AppColors.Secondary_purple,
+                        color: AppColors.secondaryColor,
                       ),
                     ))),
               ],

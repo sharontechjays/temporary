@@ -69,7 +69,11 @@ dev_dependencies:
 flutter:
   assets:
     - assets/drawables/
-    - assets/svgs/
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Black.ttf
+        - asset: assets/fonts/Nunito-ExtraBoldItalic.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

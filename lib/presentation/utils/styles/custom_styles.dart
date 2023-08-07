@@ -79,8 +79,8 @@ class MyMaterialButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           gradient: const LinearGradient(
             colors: [
-              AppColors.Primary_purple,
-              AppColors.Secondary_purple,
+              AppColors.primaryColor,
+              AppColors.secondaryColor,
             ],
             begin: FractionalOffset(0.0, 0.0),
             end: FractionalOffset(1.0, 0.0),
@@ -141,8 +141,8 @@ class AnimatedToggle extends StatelessWidget {
             ),
           ),
           onTap: (index) => onToggleCallback(index),
-          indicatorColor: AppColors.Secondary_purple,
-          labelColor: AppColors.Secondary_purple,
+          indicatorColor: AppColors.secondaryColor,
+          labelColor: AppColors.secondaryColor,
           unselectedLabelColor: Colors.black87,
           labelStyle:
               const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
@@ -150,7 +150,7 @@ class AnimatedToggle extends StatelessWidget {
               const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: AppColors.Secondary_purple,
+            color: AppColors.secondaryColor,
           ),
         ),
       ),
