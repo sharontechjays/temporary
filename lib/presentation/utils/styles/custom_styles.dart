@@ -201,5 +201,22 @@ class CustomFormField extends StatelessWidget {
   }
 }
 
+class ScreenTitleWidget extends StatelessWidget {
+  const ScreenTitleWidget({
+    super.key,
+    required this.titleText,
+  });
+
+  final String titleText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      titleText,
+      style: screenTitle,
+    );
+  }
+}
+
 var screenTitle = const TextStyle(fontSize: 33.0, fontWeight: FontWeight.w700);
 var hintStyle = const TextStyle(color: AppColors.hintColor);

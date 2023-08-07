@@ -51,7 +51,7 @@ class _SignInFormState extends State<SignInForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Log in',
+              Strings.logIn,
               style: screenTitle,
             ),
             CustomFormField(
@@ -174,7 +174,12 @@ class CustomMaterialButton extends StatelessWidget {
             tileMode: TileMode.clamp,
           ),
         ),
-        child: const Center(child: Text('Sign In')),
+        child: const Center(
+          child: Text(
+            'Sign In',
+            style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),
+          ),
+        ),
       ),
     );
   }
