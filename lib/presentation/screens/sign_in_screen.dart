@@ -92,7 +92,7 @@ class _SignInFormState extends State<SignInForm> {
                 emailController: _emailController,
                 passwordController: _passwordController),
             const SizedBox(height: 16),
-            BlocListener<SignInBloc, SignInState>(
+            BlocConsumer<SignInBloc, SignInState>(
               listener: (context, state) {
                 if (state is SignInSuccess) {
                   SharedPreferencesHelper.init();
@@ -106,17 +106,15 @@ class _SignInFormState extends State<SignInForm> {
                   _clearForm(context);
                 }
               },
-              child: BlocBuilder<SignInBloc, SignInState>(
-                builder: (context, state) {
-                  if (state is SignInLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is SignInFailure) {
-                    return Text(state.error);
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
+              builder: (context, state) {
+                if (state is SignInLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is SignInFailure) {
+                  return Text(state.error);
+                } else {
+                  return Container();
+                }
+              },
             ),
           ],
         ),
@@ -177,7 +175,7 @@ class CustomMaterialButton extends StatelessWidget {
         child: const Center(
           child: Text(
             'Sign In',
-            style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
         ),
       ),
