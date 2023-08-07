@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
+import 'package:test_flutter/presentation/constants/app_strings.dart';
+import 'package:test_flutter/presentation/screens/onboarding/onboarding.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 
 import '../blocs/sign_in/sign_in_bloc.dart';
 import '../blocs/sign_in/sign_in_event.dart';
 import '../blocs/sign_in/sign_in_state.dart';
+import '../utils/styles/custom_dimens.dart';
 import '../widgets/custom_appbar.dart';
 import 'homepage.dart';
 
@@ -42,92 +46,80 @@ class _SignInFormState extends State<SignInForm> {
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Log in',
-            style: TextStyle(fontSize: 33.0),
-            textAlign: TextAlign.start,
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          const Text(
-            'Email or Username',
-            style: TextStyle(fontSize: 16.0),
-            textAlign: TextAlign.start,
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.secondaryColor),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.secondaryColor),
-              ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Log in',
+              style: screenTitle,
             ),
-            keyboardType: TextInputType.emailAddress,
-            controller: _emailController,
-          ),
-          const SizedBox(height: 32),
-          const Text(
-            'Password',
-            style: TextStyle(fontSize: 16.0),
-            textAlign: TextAlign.start,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.secondaryColor),
-              ),
-              focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.secondaryColor),
-              ),
-              suffixIcon: IconButton(
-                icon: _isPasswordVisible
-                    ? const Icon(Icons.visibility_off)
-                    : const Icon(Icons.visibility),
-                onPressed: _togglePasswordVisibility,
-                color: AppColors.hintColor,
-              ),
+            CustomFormField(
+                emailController: _emailController,
+                title: Strings.usernameOrEmail,
+                hintText: Strings.usernameOrEmailHintText),
+            dimenHieght32,
+            const Text(
+              'Password',
+              style: TextStyle(fontSize: 16.0),
             ),
-            obscureText: !_isPasswordVisible,
-            controller: _passwordController,
-          ),
-          const SizedBox(height: 24),
-          CustomMaterialButton(
-              bloc: bloc,
-              emailController: _emailController,
-              passwordController: _passwordController),
-          const SizedBox(height: 16),
-          BlocListener<SignInBloc, SignInState>(
-            listener: (context, state) {
-              if (state is SignInSuccess) {
-                SharedPreferencesHelper.init();
-                SharedPreferencesHelper.setDummyToken(state.message.token);
-                debugPrint(state.message.email);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              } else if (state is SignInFailure) {
-                _clearForm(context);
-              }
-            },
-            child: BlocBuilder<SignInBloc, SignInState>(
-              builder: (context, state) {
-                if (state is SignInLoading) {
-                  return const CircularProgressIndicator();
+            TextFormField(
+              decoration: InputDecoration(
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.secondaryColor),
+                ),
+                hintStyle: hintStyle,
+                hintText: Strings.passwordHint,
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.secondaryColor),
+                ),
+                suffixIcon: IconButton(
+                  icon: _isPasswordVisible
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
+                  onPressed: _togglePasswordVisibility,
+                  color: AppColors.hintColor,
+                ),
+              ),
+              obscureText: !_isPasswordVisible,
+              controller: _passwordController,
+            ),
+            const SizedBox(height: 24),
+            const CustomTextButton(text: Strings.forgotPasswordOrUsername),
+            const SizedBox(height: 24),
+            CustomMaterialButton(
+                bloc: bloc,
+                emailController: _emailController,
+                passwordController: _passwordController),
+            const SizedBox(height: 16),
+            BlocListener<SignInBloc, SignInState>(
+              listener: (context, state) {
+                if (state is SignInSuccess) {
+                  SharedPreferencesHelper.init();
+                  SharedPreferencesHelper.setDummyToken(state.message.token);
+                  debugPrint(state.message.email);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
                 } else if (state is SignInFailure) {
-                  return Text(state.error);
-                } else {
-                  return Container();
+                  _clearForm(context);
                 }
               },
+              child: BlocBuilder<SignInBloc, SignInState>(
+                builder: (context, state) {
+                  if (state is SignInLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is SignInFailure) {
+                    return Text(state.error);
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

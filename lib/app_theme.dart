@@ -10,9 +10,10 @@ class AppTheme {
       splashColor: const Color(0xFF302b63),
       scaffoldBackgroundColor: AppColors.scaffoldBackground,
       textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.white,
-          fontFamily: 'Nunito'),
+            bodyColor: Colors.white,
+            displayColor: Colors.white,
+            fontFamily: 'Nunito',
+          ),
       buttonTheme: const ButtonThemeData(
         buttonColor: AppColors.primaryColor,
       ),

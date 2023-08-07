@@ -3,6 +3,8 @@ import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 
+import '../../constants/app_strings.dart';
+
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -142,15 +144,7 @@ class OnBoardingPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                TextButton(
-                    onPressed: () {},
-                    child: const Center(
-                        child: Text(
-                      'Login with existing account',
-                      style: TextStyle(
-                        color: AppColors.secondaryColor,
-                      ),
-                    ))),
+                const CustomTextButton(text: Strings.loginWithExistingAccount),
               ],
             ),
           )
@@ -165,5 +159,22 @@ class OnBoardingPage extends StatelessWidget {
       MaterialPageRoute(builder: (context) => const SignInScreen()),
     );
   }
+}
 
+class CustomTextButton extends StatelessWidget {
+  const CustomTextButton({super.key, required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: () {},
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: AppColors.secondaryColor,
+          ),
+        ));
+  }
 }

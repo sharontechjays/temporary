@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 
+import 'custom_dimens.dart';
+
 class CustomOutlinedButton extends StatelessWidget {
-  const CustomOutlinedButton(
-      {super.key,
-      required this.positiveLabel,
-      required this.positiveFunction,
-      required this.secondaryColor});
+  const CustomOutlinedButton({super.key,
+    required this.positiveLabel,
+    required this.positiveFunction,
+    required this.secondaryColor});
 
   final String positiveLabel;
   final Color secondaryColor;
@@ -90,10 +91,12 @@ class MyMaterialButton extends StatelessWidget {
         ),
         child: const Center(
             child: Text(
-          'Get Started',
-          style: TextStyle(
-              color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
-        )),
+              'Get Started',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold),
+            )),
       ),
     );
   }
@@ -129,25 +132,26 @@ class AnimatedToggle extends StatelessWidget {
         child: TabBar(
           tabs: List.generate(
             values.length,
-            (index) => Tab(
-              child: Text(
-                values[index],
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
+                (index) =>
+                Tab(
+                  child: Text(
+                    values[index],
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
-              ),
-            ),
           ),
           onTap: (index) => onToggleCallback(index),
           indicatorColor: AppColors.secondaryColor,
           labelColor: AppColors.secondaryColor,
           unselectedLabelColor: Colors.black87,
           labelStyle:
-              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           unselectedLabelStyle:
-              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: AppColors.secondaryColor,
@@ -157,3 +161,45 @@ class AnimatedToggle extends StatelessWidget {
     );
   }
 }
+
+class CustomFormField extends StatelessWidget {
+  const CustomFormField({super.key,
+    required TextEditingController emailController,
+    required this.title,
+    required this.hintText})
+      : _emailController = emailController;
+
+  final TextEditingController _emailController;
+  final String title;
+  final String hintText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        dimenHieght32,
+        Text(
+          title,
+          style: const TextStyle(fontSize: 16.0),
+        ),
+        TextFormField(
+          decoration: InputDecoration(
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.secondaryColor),
+              ),
+              hintText: hintText,
+              hintStyle: hintStyle,
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.secondaryColor),
+              )),
+          keyboardType: TextInputType.text,
+          controller: _emailController,
+        ),
+      ],
+    );
+  }
+}
+
+var screenTitle = const TextStyle(fontSize: 33.0, fontWeight: FontWeight.w700);
+var hintStyle = const TextStyle(color: AppColors.hintColor);
