@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 
 import '../constants/app_strings.dart';
@@ -65,19 +67,23 @@ class _CountdownWidgetState extends State<CountdownWidget> {
           ),
         ),
         if (_seconds == 0)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const ScreenSubHeading(
-                text: Strings.verifyTimerText2,
-              ),
-              const SizedBox(width: 3,),
-              Center(
-                child: CustomTextButton(
-                    text: Strings.resendCode,
-                    onClickButton: widget.onResendClicked),
-              )
-            ],
+          RichText(
+            text: TextSpan(
+              style: subHeadingStyle,
+              children: [
+                const TextSpan(text: Strings.verifyTimerText2),
+                TextSpan(
+                  text: Strings.resendCode,
+                  style: const TextStyle(
+                    fontFamily: 'Nunito',
+                      color: AppColors.primaryColor, fontSize: 14,fontWeight: FontWeight.w700),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      widget.onResendClicked(context);
+                    },
+                ),
+              ],
+            ),
           ),
       ],
     );

@@ -316,3 +316,7 @@ class ScreenSubHeading extends StatelessWidget {
 
 var screenTitle = const TextStyle(fontSize: 33.0, fontWeight: FontWeight.w700);
 var hintStyle = const TextStyle(color: AppColors.hintColor);
+var subHeadingStyle = const TextStyle(
+    color: AppColors.subHeadingColor,
+    fontFamily: 'Nunito',
+    fontWeight: FontWeight.w700);

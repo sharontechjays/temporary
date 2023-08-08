@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -120,7 +121,9 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
   }
 
   _onResendClicked(BuildContext context) {
-    print("clicked resend button");
+    if (kDebugMode) {
+      print("clicked resend button");
+    }
   }
 
   void _onConfirmButtonClicked(BuildContext context) {
