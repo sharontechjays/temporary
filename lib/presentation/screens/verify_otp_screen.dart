@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test_flutter/presentation/blocs/verify_otp_bloc.dart';
 import 'package:test_flutter/presentation/constants/app_strings.dart';
 import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
@@ -10,7 +11,8 @@ import '../widgets/custom_appbar.dart';
 class VerifyOTPScreen extends StatelessWidget {
   static const String routeName = RouteNames.verifyOtpScreen;
 
-  const VerifyOTPScreen({Key? key}) : super(key: key);
+  const VerifyOTPScreen({Key? key, required this.mEmail}) : super(key: key);
+  final String mEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,9 @@ class VerifyOTPScreen extends StatelessWidget {
           title: Strings.logIn, onAppbarRightButtonClicked: navToSignInScreen),
       body: BlocProvider(
         create: (_) => VerifyOtpBloc(),
-        child: const VerifyOTPForm(),
+        child: VerifyOTPForm(
+          mEmail: mEmail,
+        ),
       ),
     );
   }
@@ -30,7 +34,8 @@ navToSignInScreen(BuildContext context) {
 }
 
 class VerifyOTPForm extends StatefulWidget {
-  const VerifyOTPForm({Key? key}) : super(key: key);
+  const VerifyOTPForm({Key? key, required this.mEmail}) : super(key: key);
+  final String mEmail;
 
   @override
   State<VerifyOTPForm> createState() => _VerifyOTPFormState();
@@ -51,10 +56,20 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
               title: Strings.verifyOtpHeading,
             ),
             const ScreenSubHeading(text: Strings.verifyOtpSubHeading),
-            CustomFormField(
-                myController: _emailController,
-                title: Strings.email,
-                hintText: Strings.usernameOrEmailHintText),
+            Row(
+              children: [
+                Text(
+                  widget.mEmail,
+                  style: screenTitle.copyWith(fontSize: 14),
+                ),
+                IconButton(
+                  onPressed: () {
+                    navToSignInScreen(context, widget.mEmail);
+                  },
+                  icon: SvgPicture.asset('assets/icons/ic_editPencil.svg'),
+                )
+              ],
+            ),
             dimenHeight32,
             const SizedBox(height: 24),
             PrimaryButton(
@@ -85,8 +100,13 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
     );
   }
 
+  navToSignInScreen(BuildContext context, String email) {
+    Navigator.pushReplacementNamed(context, SignInScreen.routeName,
+        arguments: email);
+  }
+
   void _onConfirmButtonClicked(BuildContext context) {
-  /*  final VerifyOTPBloc = BlocProvider.of<VerifyOTPBloc>(context);
+    /*  final VerifyOTPBloc = BlocProvider.of<VerifyOTPBloc>(context);
     VerifyOTPBloc.add(VerifyOTPButtonPressed(email: _emailController.text));*/
   }
 

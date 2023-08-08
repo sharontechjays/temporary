@@ -32,7 +32,8 @@ class SignInScreen extends StatelessWidget {
 }
 
 void navToSignUPScreen(BuildContext context) {
-  Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
+  Navigator.pushReplacementNamed(context, SignUpScreen.routeName,
+      arguments: "");
 }
 
 class SignInForm extends StatefulWidget {
@@ -64,6 +65,7 @@ class _SignInFormState extends State<SignInForm> {
             CustomFormField(
                 myController: _emailController,
                 title: Strings.usernameOrEmail,
+                prefilledText: "",
                 hintText: Strings.usernameOrEmailHintText),
             dimenHeight32,
             buildPasswordColumn(),

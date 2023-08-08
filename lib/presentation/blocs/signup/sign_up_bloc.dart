@@ -14,7 +14,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         if (validatedString.isNotEmpty) {
           emit(SignupFailure(error: validatedString));
         } else {
-          emit(SignUpSuccess(message: "success"));
+          emit(SignUpSuccess(message: event.email));
         }
       }
     });

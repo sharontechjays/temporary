@@ -7,19 +7,18 @@ class AppRoutes {
   static Map<String, WidgetBuilder> appRoutes(BuildContext context) {
     return {
       SignInScreen.routeName: (BuildContext context) => const SignInScreen(),
-      SignUpScreen.routeName: (BuildContext context) => const SignUpScreen(),
-      VerifyOTPScreen.routeName: (BuildContext context) =>
-          const VerifyOTPScreen(),
-      /*   VerifyOtpScreen.routeName: (BuildContext context) {
-        final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-        final mobileNumber = arguments?['mobileNumber'] as String?;
-        final countryCode = arguments?['countryCode'] as String?;
-
-        return VerifyOtpScreen(
-          mobileNumber: mobileNumber ?? '',
-          countryCode: countryCode ?? '',
+      SignUpScreen.routeName: (BuildContext context) {
+        final email = ModalRoute.of(context)?.settings.arguments as String?;
+        return SignUpScreen(
+          email: email ?? "",
         );
-      },*/
+      },
+      VerifyOTPScreen.routeName: (BuildContext context) {
+        final email = ModalRoute.of(context)?.settings.arguments as String?;
+        return VerifyOTPScreen(
+          mEmail: email ?? "",
+        );
+      },
     };
   }
 }

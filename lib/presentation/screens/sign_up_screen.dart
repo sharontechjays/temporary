@@ -11,7 +11,9 @@ import '../widgets/custom_appbar.dart';
 class SignUpScreen extends StatelessWidget {
   static const String routeName = RouteNames.signUpScreen;
 
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({Key? key, required this.email}) : super(key: key);
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,9 @@ class SignUpScreen extends StatelessWidget {
           title: Strings.logIn, onAppbarRightButtonClicked: navToSignInScreen),
       body: BlocProvider(
         create: (_) => SignUpBloc(),
-        child: const SignUpForm(),
+        child: SignUpForm(
+          email: email,
+        ),
       ),
     );
   }
@@ -30,18 +34,15 @@ navToSignInScreen(BuildContext context) {
   Navigator.pushReplacementNamed(context, SignInScreen.routeName);
 }
 
-navToVerifyOTPScreen(BuildContext context) {
-  Navigator.pushReplacementNamed(context, VerifyOTPScreen.routeName);
+navToVerifyOTPScreen(BuildContext context, String email) {
+  Navigator.pushReplacementNamed(context, VerifyOTPScreen.routeName,
+      arguments: email);
 }
 
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({Key? key}) : super(key: key);
+class SignUpForm extends StatelessWidget {
+  SignUpForm({Key? key, required this.email}) : super(key: key);
+  final String email;
 
-  @override
-  State<SignUpForm> createState() => _SignUpFormState();
-}
-
-class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController _emailController = TextEditingController();
 
   @override
@@ -59,6 +60,7 @@ class _SignUpFormState extends State<SignUpForm> {
             CustomFormField(
                 myController: _emailController,
                 title: Strings.email,
+                prefilledText: email,
                 hintText: Strings.usernameOrEmailHintText),
             dimenHeight32,
             const SizedBox(height: 24),
@@ -70,7 +72,7 @@ class _SignUpFormState extends State<SignUpForm> {
             BlocConsumer<SignUpBloc, SignUpState>(
               listener: (context, state) {
                 if (state is SignUpSuccess) {
-                  navToVerifyOTPScreen(context);
+                  navToVerifyOTPScreen(context, state.message);
                 } else if (state is SignupFailure) {
                   _clearForm(context);
                 }
@@ -100,6 +102,4 @@ class _SignUpFormState extends State<SignUpForm> {
     _emailController.clear();
     FocusScope.of(context).unfocus();
   }
-
-  void navToForgotPassword(BuildContext context) {}
 }

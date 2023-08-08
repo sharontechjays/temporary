@@ -161,6 +161,7 @@ class OnBoardingPage extends StatelessWidget {
   }
 
   void navToSignUp(BuildContext context) {
-    Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
+    Navigator.pushReplacementNamed(context, SignUpScreen.routeName,
+        arguments: "");
   }
 }

@@ -165,15 +165,20 @@ class CustomFormField extends StatelessWidget {
       {super.key,
       required TextEditingController myController,
       required this.title,
+      required this.prefilledText,
       required this.hintText})
       : _myController = myController;
 
   final TextEditingController _myController;
   final String title;
   final String hintText;
+  final String prefilledText;
 
   @override
   Widget build(BuildContext context) {
+    if (prefilledText.isNotEmpty) {
+      _myController.text = prefilledText;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
