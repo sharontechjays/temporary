@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
 import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
-import 'package:test_flutter/presentation/utils/anims/fade_route.dart';
-import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 
 import '../../constants/app_strings.dart';

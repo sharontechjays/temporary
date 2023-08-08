@@ -7,4 +7,5 @@ class AppColors {
   static const Color secondaryColor = Color(0xff8980F1);
   static const Color primaryColor = Color(0xff5B51CF);
   static const Color hintColor = Color(0xff3E404C);
+  static const Color subHeadingColor = Color(0xffCACBCE);
 }

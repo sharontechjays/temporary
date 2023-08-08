@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/presentation/constants/app_strings.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/utils.dart';
 
@@ -35,7 +34,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(),
-              const Center(child: Text(Strings.appNameBrackets)),
+         /*     const Center(child: Text(Strings.appNameBrackets)),*/
+              const Center(
+                  child: Image(
+                      image: AssetImage('assets/drawables/bracketology_banner.png'))),
               CustomTextButton(
                 text: title,
                 onClickButton: onAppbarRightButtonClicked,

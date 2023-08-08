@@ -4,10 +4,11 @@ import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'custom_dimens.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
-  const CustomOutlinedButton({super.key,
-    required this.positiveLabel,
-    required this.positiveFunction,
-    required this.secondaryColor});
+  const CustomOutlinedButton(
+      {super.key,
+      required this.positiveLabel,
+      required this.positiveFunction,
+      required this.secondaryColor});
 
   final String positiveLabel;
   final Color secondaryColor;
@@ -91,12 +92,10 @@ class MyMaterialButton extends StatelessWidget {
         ),
         child: const Center(
             child: Text(
-              'Get Started',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold),
-            )),
+          'Get Started',
+          style: TextStyle(
+              color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
+        )),
       ),
     );
   }
@@ -132,26 +131,25 @@ class AnimatedToggle extends StatelessWidget {
         child: TabBar(
           tabs: List.generate(
             values.length,
-                (index) =>
-                Tab(
-                  child: Text(
-                    values[index],
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+            (index) => Tab(
+              child: Text(
+                values[index],
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
                 ),
+              ),
+            ),
           ),
           onTap: (index) => onToggleCallback(index),
           indicatorColor: AppColors.secondaryColor,
           labelColor: AppColors.secondaryColor,
           unselectedLabelColor: Colors.black87,
           labelStyle:
-          const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           unselectedLabelStyle:
-          const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: AppColors.secondaryColor,
@@ -163,10 +161,11 @@ class AnimatedToggle extends StatelessWidget {
 }
 
 class CustomFormField extends StatelessWidget {
-  const CustomFormField({super.key,
-    required TextEditingController myController,
-    required this.title,
-    required this.hintText})
+  const CustomFormField(
+      {super.key,
+      required TextEditingController myController,
+      required this.title,
+      required this.hintText})
       : _myController = myController;
 
   final TextEditingController _myController;
@@ -202,9 +201,10 @@ class CustomFormField extends StatelessWidget {
 }
 
 class CustomTextButton extends StatelessWidget {
-  const CustomTextButton({super.key,
-    required this.text,
-    required this.onClickButton(BuildContext context)});
+  const CustomTextButton(
+      {super.key,
+      required this.text,
+      required this.onClickButton(BuildContext context)});
 
   final String text;
   final void Function(BuildContext context) onClickButton;
@@ -243,11 +243,10 @@ class ScreenHeading extends StatelessWidget {
 }
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
-    super.key,
-    required this.title,
-    required this.onPrimaryButtonClicked(BuildContext context)
-  });
+  const PrimaryButton(
+      {super.key,
+      required this.title,
+      required this.onPrimaryButtonClicked(BuildContext context)});
 
   final String title;
   final Function(BuildContext context) onPrimaryButtonClicked;
@@ -273,7 +272,7 @@ class PrimaryButton extends StatelessWidget {
             tileMode: TileMode.clamp,
           ),
         ),
-        child:  Center(
+        child: Center(
           child: Text(
             title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
@@ -284,19 +283,28 @@ class PrimaryButton extends StatelessWidget {
   }
 }
 
-class ScreenTitleWidget extends StatelessWidget {
-  const ScreenTitleWidget({
+class ScreenSubHeading extends StatelessWidget {
+  const ScreenSubHeading({
     super.key,
-    required this.titleText,
+    required this.text,
   });
 
-  final String titleText;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      titleText,
-      style: screenTitle,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 8,
+        ),
+        Text(
+          text,
+          style: screenTitle.copyWith(
+              fontSize: 14, color: AppColors.subHeadingColor),
+        ),
+      ],
     );
   }
 }

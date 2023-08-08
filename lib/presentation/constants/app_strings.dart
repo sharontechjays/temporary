@@ -7,14 +7,20 @@ class Strings {
   static const usernameOrEmail = "Email or Username";
   static const logIn = "Log in";
   static const email = "Email";
+  static const confirm = "Confirm";
   static const usernameOrEmailHintText = "example@gmail.com";
   static const passwordHint = "Enter your password";
   static const loginWithExistingAccount = "Login with existing account";
   static const forgotPasswordOrUsername = "Forgot username/password?";
   static const signUpScreenHeading = "Sign up with email";
+  static const signUpSubHeading = "We will send a verification code to this email.";
+  static const verifyOtpHeading = "Verify email";
+  static const verifyOtpSubHeading = "Please enter the 4-digit verification code sent to";
+
 }
 
 class RouteNames {
   static const signInScreen = "sign_in";
   static const signUpScreen = "sign_up";
+  static const verifyOtpScreen = "VerifyOTPScreen";
 }
