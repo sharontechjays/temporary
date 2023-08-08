@@ -11,3 +11,7 @@ class Strings {
   static const loginWithExistingAccount = "Login with existing account";
   static const forgotPasswordOrUsername = "Forgot username/password?";
 }
+
+class RouteNames {
+  static const signInScreen = "sign_in";
+}

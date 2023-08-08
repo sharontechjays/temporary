@@ -157,9 +157,9 @@ class OnBoardingPage extends StatelessWidget {
   }
 
   void navToSigIn(BuildContext context) {
-    Navigator.pushReplacement(
+    Navigator.pushReplacementNamed(
       context,
-      MaterialPageRoute(builder: (context) => const SignInScreen()),
+      SignInScreen.routeName,
     );
   }
 

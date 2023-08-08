@@ -14,6 +14,7 @@ import '../widgets/custom_appbar.dart';
 import 'homepage.dart';
 
 class SignInScreen extends StatelessWidget {
+  static const String routeName = RouteNames.signInScreen;
   const SignInScreen({Key? key}) : super(key: key);
 
   @override
@@ -59,30 +60,35 @@ class _SignInFormState extends State<SignInForm> {
                 title: Strings.usernameOrEmail,
                 hintText: Strings.usernameOrEmailHintText),
             dimenHieght32,
-            const Text(
-              'Password',
-              style: TextStyle(fontSize: 16.0),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.secondaryColor),
+
+            Column(
+              children: [
+                const Text(
+                  'Password',
+                  style: TextStyle(fontSize: 16.0),
                 ),
-                hintStyle: hintStyle,
-                hintText: Strings.passwordHint,
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.secondaryColor),
+                TextFormField(
+                  decoration: InputDecoration(
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.secondaryColor),
+                    ),
+                    hintStyle: hintStyle,
+                    hintText: Strings.passwordHint,
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.secondaryColor),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: _isPasswordVisible
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
+                      onPressed: _togglePasswordVisibility,
+                      color: AppColors.hintColor,
+                    ),
+                  ),
+                  obscureText: !_isPasswordVisible,
+                  controller: _passwordController,
                 ),
-                suffixIcon: IconButton(
-                  icon: _isPasswordVisible
-                      ? const Icon(Icons.visibility_off)
-                      : const Icon(Icons.visibility),
-                  onPressed: _togglePasswordVisibility,
-                  color: AppColors.hintColor,
-                ),
-              ),
-              obscureText: !_isPasswordVisible,
-              controller: _passwordController,
+              ],
             ),
             const SizedBox(height: 24),
             CustomTextButton(

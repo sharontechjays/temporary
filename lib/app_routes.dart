@@ -1,17 +1,12 @@
-/*
+
 import 'package:flutter/material.dart';
-import 'package:test_flutter/screens/splash_screen.dart';
-import 'package:test_flutter/screens/login_screen.dart';
-import 'package:test_flutter/screens/home_screen.dart';
-import 'package:test_flutter/screens/verify_otp_screen.dart';
+import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> appRoutes(BuildContext context) {
     return {
-      SplashScreen.routeName: (BuildContext context) => const SplashScreen(),
-      LoginScreen.routeName: (BuildContext context) => const LoginScreen(),
-      HomeScreen.routeName: (BuildContext context) => const HomeScreen(),
-      VerifyOtpScreen.routeName: (BuildContext context) {
+      SignInScreen.routeName: (BuildContext context) =>  const SignInScreen(),
+   /*   VerifyOtpScreen.routeName: (BuildContext context) {
         final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
         final mobileNumber = arguments?['mobileNumber'] as String?;
         final countryCode = arguments?['countryCode'] as String?;
@@ -20,8 +15,7 @@ class AppRoutes {
           mobileNumber: mobileNumber ?? '',
           countryCode: countryCode ?? '',
         );
-      },
+      },*/
     };
   }
 }
-*/

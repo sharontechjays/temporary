@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/app_routes.dart';
 import 'package:test_flutter/app_theme.dart';
-import 'package:test_flutter/presentation/screens/homepage.dart';
 import 'package:test_flutter/presentation/screens/onboarding/onboarding.dart';
-import 'presentation/screens/sign_in_screen.dart';
-
-final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Base setup',
       debugShowCheckedModeBanner: false,
       home: const OnBoardingScreen(),
+      routes: AppRoutes.appRoutes(context),
       theme:AppTheme.themeData(context)
     );
   }
