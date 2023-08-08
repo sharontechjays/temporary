@@ -6,6 +6,7 @@ class Strings {
   static const appNameBrackets = "[Bracketology]";
   static const usernameOrEmail = "Email or Username";
   static const logIn = "Log in";
+  static const signIn = "Sign in";
   static const email = "Email";
   static const confirm = "Confirm";
   static const resendCode = "Resend";
@@ -21,10 +22,14 @@ class Strings {
       "Please enter the 4-digit verification code sent to";
   static const verifyTimerText = "Resend verification code in ";
   static const verifyTimerText2 = "Didn’t receive verification code?  ";
+  static const createPassword = "Create password";
+  static const createPasswordSubHeading = "Create a strong and unique password using the guidelines below.";
+  static const confirmPasswordHintText = "Re-enter new password";
 }
 
 class RouteNames {
   static const signInScreen = "sign_in";
   static const signUpScreen = "sign_up";
   static const verifyOtpScreen = "VerifyOTPScreen";
+  static const createPasswordScreen = "createPassword";
 }

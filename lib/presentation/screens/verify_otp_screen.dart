@@ -2,15 +2,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:test_flutter/presentation/blocs/verify_otp_bloc.dart';
+import 'package:test_flutter/presentation/blocs/verifyotp/verify_otp_bloc.dart';
+import 'package:test_flutter/presentation/blocs/verifyotp/verify_otp_event.dart';
 import 'package:test_flutter/presentation/constants/app_strings.dart';
 import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
 import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
+import '../blocs/verifyotp/verify_otp_state.dart';
 import '../utils/styles/custom_dimens.dart';
 import '../widgets/count_down_timer.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/otp_text_field.dart';
+import 'create_password_screen.dart';
 
 class VerifyOTPScreen extends StatelessWidget {
   static const String routeName = RouteNames.verifyOtpScreen;
@@ -95,6 +98,7 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
             BlocConsumer<VerifyOtpBloc, VerifyOtpState>(
               listener: (context, state) {
                 if (state is VerifyOTPSuccess) {
+                  navToCreatePasswordScreen(context);
                 } else if (state is VerifyOTPFailure) {
                   _clearForm(context);
                 }
@@ -120,6 +124,10 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
         arguments: email);
   }
 
+  navToCreatePasswordScreen(BuildContext context) {
+    Navigator.pushReplacementNamed(context, CreatePasswordScreen.routeName);
+  }
+
   _onResendClicked(BuildContext context) {
     if (kDebugMode) {
       print("clicked resend button");
@@ -127,8 +135,8 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
   }
 
   void _onConfirmButtonClicked(BuildContext context) {
-    /*  final VerifyOTPBloc = BlocProvider.of<VerifyOTPBloc>(context);
-    VerifyOTPBloc.add(VerifyOTPButtonPressed(email: _emailController.text));*/
+    final verifyOtpBloc = BlocProvider.of<VerifyOtpBloc>(context);
+    verifyOtpBloc.add(VerifyOtpButtonPressed(pin: "0000"));
   }
 
   void _clearForm(BuildContext context) {

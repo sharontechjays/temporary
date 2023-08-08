@@ -1,4 +1,8 @@
-part of 'verify_otp_bloc.dart';
+
+import 'package:equatable/equatable.dart';
+
+
+
 
 abstract class VerifyOtpState extends Equatable {
   @override

@@ -50,8 +50,6 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<SignInBloc>(context);
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -75,10 +73,9 @@ class _SignInFormState extends State<SignInForm> {
               onClickButton: navToForgotPassword,
             ),
             const SizedBox(height: 24),
-            CustomMaterialButton(
-                bloc: bloc,
-                emailController: _emailController,
-                passwordController: _passwordController),
+            PrimaryButton(
+                title: Strings.signIn,
+                onPrimaryButtonClicked: _signInButtonClicked),
             const SizedBox(height: 16),
             BlocConsumer<SignInBloc, SignInState>(
               listener: (context, state) {
@@ -143,6 +140,14 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
+  _signInButtonClicked(BuildContext context) {
+    final bloc = BlocProvider.of<SignInBloc>(context);
+    bloc.add(SignInButtonPressed(
+      email: _emailController.text,
+      password: _passwordController.text,
+    ));
+  }
+
   void _clearForm(BuildContext context) {
     _emailController.clear();
     _passwordController.clear();
@@ -156,52 +161,4 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   void navToForgotPassword(BuildContext context) {}
-}
-
-class CustomMaterialButton extends StatelessWidget {
-  const CustomMaterialButton({
-    super.key,
-    required this.bloc,
-    required TextEditingController emailController,
-    required TextEditingController passwordController,
-  })  : _emailController = emailController,
-        _passwordController = passwordController;
-
-  final SignInBloc bloc;
-  final TextEditingController _emailController;
-  final TextEditingController _passwordController;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        bloc.add(SignInButtonPressed(
-          email: _emailController.text,
-          password: _passwordController.text,
-        ));
-      },
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          gradient: const LinearGradient(
-            colors: [
-              AppColors.primaryColor,
-              AppColors.secondaryColor,
-            ],
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(0.5, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          ),
-        ),
-        child: const Center(
-          child: Text(
-            'Sign In',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-          ),
-        ),
-      ),
-    );
-  }
 }

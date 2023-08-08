@@ -75,8 +75,10 @@ class _CountdownWidgetState extends State<CountdownWidget> {
                 TextSpan(
                   text: Strings.resendCode,
                   style: const TextStyle(
-                    fontFamily: 'Nunito',
-                      color: AppColors.primaryColor, fontSize: 14,fontWeight: FontWeight.w700),
+                      fontFamily: 'Nunito',
+                      color: AppColors.primaryColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       widget.onResendClicked(context);
