@@ -15,6 +15,7 @@ import 'homepage.dart';
 
 class SignInScreen extends StatelessWidget {
   static const String routeName = RouteNames.signInScreen;
+
   const SignInScreen({Key? key}) : super(key: key);
 
   @override
@@ -59,8 +60,7 @@ class _SignInFormState extends State<SignInForm> {
                 emailController: _emailController,
                 title: Strings.usernameOrEmail,
                 hintText: Strings.usernameOrEmailHintText),
-            dimenHieght32,
-
+            dimenHeight32,
             Column(
               children: [
                 const Text(

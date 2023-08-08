@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 
+import 'anims/fade_route.dart';
+
 class Utils {
   String prettyPrint(String input) {
     dynamic json = const JsonDecoder().convert(input);
@@ -82,5 +84,4 @@ class Utils {
     }
   }
 }*/
-
 }

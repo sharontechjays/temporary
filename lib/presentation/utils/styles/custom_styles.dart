@@ -177,7 +177,7 @@ class CustomFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        dimenHieght32,
+        dimenHeight32,
         Text(
           title,
           style: const TextStyle(fontSize: 16.0),
