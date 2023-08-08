@@ -140,11 +140,14 @@ class OnBoardingPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                MyMaterialButton(onClickButton: newFunction),
+                MyMaterialButton(onClickButton: navToSigIn),
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomTextButton(text: Strings.loginWithExistingAccount),
+                CustomTextButton(
+                  text: Strings.loginWithExistingAccount,
+                  onClickButton: navToSignUp,
+                ),
               ],
             ),
           )
@@ -153,28 +156,17 @@ class OnBoardingPage extends StatelessWidget {
     );
   }
 
-  void newFunction(BuildContext context) {
+  void navToSigIn(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const SignInScreen()),
     );
   }
-}
 
-class CustomTextButton extends StatelessWidget {
-  const CustomTextButton({super.key, required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () {},
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: AppColors.secondaryColor,
-          ),
-        ));
+  void navToSignUp(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const SignInScreen()),
+    );
   }
 }

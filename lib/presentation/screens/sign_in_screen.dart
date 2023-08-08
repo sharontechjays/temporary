@@ -85,7 +85,10 @@ class _SignInFormState extends State<SignInForm> {
               controller: _passwordController,
             ),
             const SizedBox(height: 24),
-            const CustomTextButton(text: Strings.forgotPasswordOrUsername),
+            CustomTextButton(
+              text: Strings.forgotPasswordOrUsername,
+              onClickButton: navToForgotPassword,
+            ),
             const SizedBox(height: 24),
             CustomMaterialButton(
                 bloc: bloc,
@@ -133,6 +136,8 @@ class _SignInFormState extends State<SignInForm> {
       _isPasswordVisible = !_isPasswordVisible;
     });
   }
+
+  void navToForgotPassword(BuildContext context) {}
 }
 
 class CustomMaterialButton extends StatelessWidget {
