@@ -8,6 +8,7 @@ class Strings {
   static const logIn = "Log in";
   static const email = "Email";
   static const confirm = "Confirm";
+  static const resendCode = "Resend code";
   static const usernameOrEmailHintText = "example@gmail.com";
   static const passwordHint = "Enter your password";
   static const loginWithExistingAccount = "Login with existing account";
@@ -16,6 +17,8 @@ class Strings {
   static const signUpSubHeading = "We will send a verification code to this email.";
   static const verifyOtpHeading = "Verify email";
   static const verifyOtpSubHeading = "Please enter the 4-digit verification code sent to";
+  static const verifyTimerText = "Resend verification code in ";
+  static const verifyTimerText2 = "Didn’t receive verification code? ";
 
 }
 

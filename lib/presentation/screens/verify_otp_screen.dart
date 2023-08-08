@@ -4,9 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test_flutter/presentation/blocs/verify_otp_bloc.dart';
 import 'package:test_flutter/presentation/constants/app_strings.dart';
 import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
+import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 import '../utils/styles/custom_dimens.dart';
+import '../widgets/count_down_timer.dart';
 import '../widgets/custom_appbar.dart';
+import '../widgets/otp_text_field.dart';
 
 class VerifyOTPScreen extends StatelessWidget {
   static const String routeName = RouteNames.verifyOtpScreen;
@@ -42,8 +45,6 @@ class VerifyOTPForm extends StatefulWidget {
 }
 
 class _VerifyOTPFormState extends State<VerifyOTPForm> {
-  final TextEditingController _emailController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -64,14 +65,27 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
                 ),
                 IconButton(
                   onPressed: () {
-                    navToSignInScreen(context, widget.mEmail);
+                    navToSignUpScreen(context, widget.mEmail);
                   },
                   icon: SvgPicture.asset('assets/icons/ic_editPencil.svg'),
-                )
+                ),
               ],
             ),
             dimenHeight32,
-            const SizedBox(height: 24),
+            OTPTextField(
+              width: MediaQuery.of(context).size.width,
+              length: 4,
+              fieldWidth: 50,
+              style: const TextStyle(fontSize: 17),
+              textFieldAlignment: MainAxisAlignment.start,
+              fieldStyle: FieldStyle.underline,
+              onCompleted: (pin) {},
+            ),
+            dimenHeight32,
+            CountdownWidget(
+              onResendClicked: _onResendClicked,
+            ),
+            const SizedBox(height: 32),
             PrimaryButton(
               title: Strings.confirm,
               onPrimaryButtonClicked: _onConfirmButtonClicked,
@@ -100,9 +114,13 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
     );
   }
 
-  navToSignInScreen(BuildContext context, String email) {
-    Navigator.pushReplacementNamed(context, SignInScreen.routeName,
+  navToSignUpScreen(BuildContext context, String email) {
+    Navigator.pushReplacementNamed(context, SignUpScreen.routeName,
         arguments: email);
+  }
+
+  _onResendClicked(BuildContext context) {
+    print("clicked resend button");
   }
 
   void _onConfirmButtonClicked(BuildContext context) {
@@ -111,7 +129,6 @@ class _VerifyOTPFormState extends State<VerifyOTPForm> {
   }
 
   void _clearForm(BuildContext context) {
-    _emailController.clear();
     FocusScope.of(context).unfocus();
   }
 
