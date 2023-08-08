@@ -4,11 +4,10 @@ import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'custom_dimens.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
-  const CustomOutlinedButton(
-      {super.key,
-      required this.positiveLabel,
-      required this.positiveFunction,
-      required this.secondaryColor});
+  const CustomOutlinedButton({super.key,
+    required this.positiveLabel,
+    required this.positiveFunction,
+    required this.secondaryColor});
 
   final String positiveLabel;
   final Color secondaryColor;
@@ -92,10 +91,12 @@ class MyMaterialButton extends StatelessWidget {
         ),
         child: const Center(
             child: Text(
-          'Get Started',
-          style: TextStyle(
-              color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
-        )),
+              'Get Started',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold),
+            )),
       ),
     );
   }
@@ -131,25 +132,26 @@ class AnimatedToggle extends StatelessWidget {
         child: TabBar(
           tabs: List.generate(
             values.length,
-            (index) => Tab(
-              child: Text(
-                values[index],
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
+                (index) =>
+                Tab(
+                  child: Text(
+                    values[index],
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
-              ),
-            ),
           ),
           onTap: (index) => onToggleCallback(index),
           indicatorColor: AppColors.secondaryColor,
           labelColor: AppColors.secondaryColor,
           unselectedLabelColor: Colors.black87,
           labelStyle:
-              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           unselectedLabelStyle:
-              const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: AppColors.secondaryColor,
@@ -161,14 +163,13 @@ class AnimatedToggle extends StatelessWidget {
 }
 
 class CustomFormField extends StatelessWidget {
-  const CustomFormField(
-      {super.key,
-      required TextEditingController emailController,
-      required this.title,
-      required this.hintText})
-      : _emailController = emailController;
+  const CustomFormField({super.key,
+    required TextEditingController myController,
+    required this.title,
+    required this.hintText})
+      : _myController = myController;
 
-  final TextEditingController _emailController;
+  final TextEditingController _myController;
   final String title;
   final String hintText;
 
@@ -193,7 +194,7 @@ class CustomFormField extends StatelessWidget {
                 borderSide: BorderSide(color: AppColors.secondaryColor),
               )),
           keyboardType: TextInputType.text,
-          controller: _emailController,
+          controller: _myController,
         ),
       ],
     );
@@ -201,10 +202,9 @@ class CustomFormField extends StatelessWidget {
 }
 
 class CustomTextButton extends StatelessWidget {
-  const CustomTextButton(
-      {super.key,
-      required this.text,
-      required this.onClickButton(BuildContext context)});
+  const CustomTextButton({super.key,
+    required this.text,
+    required this.onClickButton(BuildContext context)});
 
   final String text;
   final void Function(BuildContext context) onClickButton;
@@ -225,6 +225,62 @@ class CustomTextButton extends StatelessWidget {
             color: AppColors.secondaryColor,
           ),
         ));
+  }
+}
+
+class ScreenHeading extends StatelessWidget {
+  final String title;
+
+  const ScreenHeading({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: screenTitle,
+    );
+  }
+}
+
+class PrimaryButton extends StatelessWidget {
+  const PrimaryButton({
+    super.key,
+    required this.title,
+    required this.onPrimaryButtonClicked(BuildContext context)
+  });
+
+  final String title;
+  final Function(BuildContext context) onPrimaryButtonClicked;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        onPrimaryButtonClicked(context);
+      },
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          gradient: const LinearGradient(
+            colors: [
+              AppColors.primaryColor,
+              AppColors.secondaryColor,
+            ],
+            begin: FractionalOffset(0.0, 0.0),
+            end: FractionalOffset(0.5, 0.0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.clamp,
+          ),
+        ),
+        child:  Center(
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          ),
+        ),
+      ),
+    );
   }
 }
 

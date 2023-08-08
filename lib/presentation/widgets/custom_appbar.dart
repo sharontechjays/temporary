@@ -7,10 +7,14 @@ import '../utils/styles/custom_styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color backgroundColor;
+  final Function(BuildContext context) onAppbarRightButtonClicked;
+  final String title;
 
   const CustomAppBar({
     Key? key,
+    this.title="Sign up",
     this.backgroundColor = AppColors.scaffoldBackground,
+    required this.onAppbarRightButtonClicked(BuildContext context)
   }) : super(key: key);
 
   @override
@@ -33,8 +37,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               const SizedBox(),
               const Center(child: Text(Strings.appNameBrackets)),
               CustomTextButton(
-                text: 'Sign up',
-                onClickButton: navToSignUP,
+                text: title,
+                onClickButton: onAppbarRightButtonClicked,
               )
             ],
           ),
@@ -44,6 +48,4 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
     );
   }
-
-  void navToSignUP(BuildContext context) {}
 }

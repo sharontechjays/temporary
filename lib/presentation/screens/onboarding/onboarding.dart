@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
+import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
 import 'package:test_flutter/presentation/utils/anims/fade_route.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
@@ -141,13 +142,13 @@ class OnBoardingPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                MyMaterialButton(onClickButton: navToSigIn),
+                MyMaterialButton(onClickButton: navToSignUp),
                 const SizedBox(
                   height: 20,
                 ),
                 CustomTextButton(
                   text: Strings.loginWithExistingAccount,
-                  onClickButton: navToSignUp,
+                  onClickButton: navToSigIn,
                 ),
               ],
             ),
@@ -162,6 +163,6 @@ class OnBoardingPage extends StatelessWidget {
   }
 
   void navToSignUp(BuildContext context) {
-    Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+    Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
   }
 }

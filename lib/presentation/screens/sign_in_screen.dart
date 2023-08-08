@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 import 'package:test_flutter/presentation/constants/app_strings.dart';
 import 'package:test_flutter/presentation/screens/onboarding/onboarding.dart';
+import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
 
@@ -21,13 +22,17 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const CustomAppBar(onAppbarRightButtonClicked: navToSignUPScreen),
       body: BlocProvider(
         create: (_) => SignInBloc(),
         child: const SignInForm(),
       ),
     );
   }
+}
+
+void navToSignUPScreen(BuildContext context) {
+  Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
 }
 
 class SignInForm extends StatefulWidget {
@@ -57,39 +62,11 @@ class _SignInFormState extends State<SignInForm> {
               style: screenTitle,
             ),
             CustomFormField(
-                emailController: _emailController,
+                myController: _emailController,
                 title: Strings.usernameOrEmail,
                 hintText: Strings.usernameOrEmailHintText),
             dimenHeight32,
-            Column(
-              children: [
-                const Text(
-                  'Password',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.secondaryColor),
-                    ),
-                    hintStyle: hintStyle,
-                    hintText: Strings.passwordHint,
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.secondaryColor),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: _isPasswordVisible
-                          ? const Icon(Icons.visibility_off)
-                          : const Icon(Icons.visibility),
-                      onPressed: _togglePasswordVisibility,
-                      color: AppColors.hintColor,
-                    ),
-                  ),
-                  obscureText: !_isPasswordVisible,
-                  controller: _passwordController,
-                ),
-              ],
-            ),
+            buildPasswordColumn(),
             const SizedBox(height: 24),
             CustomTextButton(
               text: Strings.forgotPasswordOrUsername,
@@ -128,6 +105,39 @@ class _SignInFormState extends State<SignInForm> {
           ],
         ),
       ),
+    );
+  }
+
+  Column buildPasswordColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Password',
+          style: TextStyle(fontSize: 16.0),
+        ),
+        TextFormField(
+          decoration: InputDecoration(
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.secondaryColor),
+            ),
+            hintStyle: hintStyle,
+            hintText: Strings.passwordHint,
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.secondaryColor),
+            ),
+            suffixIcon: IconButton(
+              icon: _isPasswordVisible
+                  ? const Icon(Icons.visibility_off)
+                  : const Icon(Icons.visibility),
+              onPressed: _togglePasswordVisibility,
+              color: AppColors.hintColor,
+            ),
+          ),
+          obscureText: !_isPasswordVisible,
+          controller: _passwordController,
+        ),
+      ],
     );
   }
 
