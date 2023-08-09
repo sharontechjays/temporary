@@ -18,16 +18,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int numOfTabs = 4;
 
   final List<String> titles = [
-    'Welcome to my custom App',
-    'Tab 2',
-    'Tab 3',
-    'Tab 4'
+    'Welcome to Bracketology!',
+    'Compete Against Other Fans',
+    'Dynamic Gameplay',
+    '100% Free to Play'
   ];
+  final List<AssetImage> assetImages = [
+    const AssetImage('assets/drawables/image_one.png'),
+    const AssetImage('assets/drawables/image_one.png'),
+    const AssetImage('assets/drawables/image_one.png'),
+    const AssetImage('assets/drawables/image_one.png')
+  ];
+
   final List<String> descriptions = [
     'Play fantasy games for all of your favorite reality TV shows in one centralized location.',
-    'This is the second tab description.',
-    'This is the third tab description.',
-    'This is the fourth tab description.',
+    'Join a public league, or start a private league with friends.',
+    'Choose from multiple game types, with show-specific rules and fully automated scoring.',
+    'We are committed to offering free fantasy gaming for all reality TV fans.',
   ];
 
   @override
@@ -62,6 +69,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   return OnBoardingPage(
                     title: titles[index],
                     description: descriptions[index],
+                    assetImage: assetImages[index],
                   );
                 },
               ),
@@ -92,9 +100,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 class OnBoardingPage extends StatelessWidget {
   final String title;
   final String description;
+  final AssetImage assetImage;
 
   const OnBoardingPage(
-      {super.key, required this.title, required this.description});
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.assetImage});
 
   @override
   Widget build(BuildContext context) {

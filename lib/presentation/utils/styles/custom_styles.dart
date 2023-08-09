@@ -228,8 +228,8 @@ class PrimaryButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           gradient: const LinearGradient(
             colors: [
-              AppColors.primaryColor,
               AppColors.secondaryColor,
+              AppColors.primaryColor,
             ],
             begin: FractionalOffset(0.0, 0.0),
             end: FractionalOffset(0.5, 0.0),
