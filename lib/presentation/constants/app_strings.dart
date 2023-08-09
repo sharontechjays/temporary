@@ -24,9 +24,11 @@ class Strings {
   static const verifyTimerText = "Resend verification code in ";
   static const verifyTimerText2 = "Didn’t receive verification code?  ";
   static const createPassword = "Create password";
+  static const usernameTextHint = "Enter your username";
   static const createPasswordSubHeading =
       "Create a strong and unique password using the guidelines below.";
   static const confirmPasswordHintText = "Re-enter new password";
+  static const userName = "Username";
   static const createUserName = "Create username";
   static const createUserNameScreenSubHeading =
       "Create a username with 3-20 characters.";

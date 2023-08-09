@@ -116,14 +116,14 @@ class OnBoardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Expanded(
+           Expanded(
             flex: 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Center(
                     child: Image(
-                        image: AssetImage('assets/drawables/image_one.png')))
+                        image: assetImage))
               ],
             ),
           ),

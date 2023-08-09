@@ -38,6 +38,8 @@ class CreateUserNameForm extends StatefulWidget {
 }
 
 class _CreateUserNameFormState extends State<CreateUserNameForm> {
+  final TextEditingController _usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,9 +51,14 @@ class _CreateUserNameFormState extends State<CreateUserNameForm> {
             const ScreenHeading(
               title: Strings.createUserName,
             ),
-            const ScreenSubHeading(text: Strings.createPasswordSubHeading),
+            const ScreenSubHeading(
+                text: Strings.createUserNameScreenSubHeading),
             dimenHeight32,
-
+            CustomFormField(
+                myController: _usernameController,
+                title: Strings.userName,
+                prefilledText: "",
+                hintText: Strings.usernameTextHint),
             dimenHeight32,
             const SizedBox(height: 32),
             PrimaryButton(
