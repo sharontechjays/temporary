@@ -23,8 +23,12 @@ class Strings {
   static const verifyTimerText = "Resend verification code in ";
   static const verifyTimerText2 = "Didn’t receive verification code?  ";
   static const createPassword = "Create password";
-  static const createPasswordSubHeading = "Create a strong and unique password using the guidelines below.";
+  static const createPasswordSubHeading =
+      "Create a strong and unique password using the guidelines below.";
   static const confirmPasswordHintText = "Re-enter new password";
+  static const createUserName = "Create username";
+  static const createUserNameScreenSubHeading =
+      "Create a username with 3-20 characters.";
 }
 
 class RouteNames {
@@ -32,4 +36,5 @@ class RouteNames {
   static const signUpScreen = "sign_up";
   static const verifyOtpScreen = "VerifyOTPScreen";
   static const createPasswordScreen = "createPassword";
+  static const createUsrNameScreen = "createUserName";
 }

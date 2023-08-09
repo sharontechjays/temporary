@@ -25,7 +25,7 @@ class VerifyOTPScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-          title: Strings.logIn, onAppbarRightButtonClicked: navToSignInScreen),
+          title: "", onAppbarRightButtonClicked: navToSignInScreen),
       body: BlocProvider(
         create: (_) => VerifyOtpBloc(),
         child: VerifyOTPForm(

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 import 'package:test_flutter/presentation/blocs/create_password_bloc.dart';
 import 'package:test_flutter/presentation/constants/app_strings.dart';
+import 'package:test_flutter/presentation/screens/create_username.dart';
 import 'package:test_flutter/presentation/screens/onboarding/onboarding.dart';
 import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
@@ -23,7 +24,8 @@ class CreatePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(onAppbarRightButtonClicked: navToSignUPScreen),
+      appBar: const CustomAppBar(
+          title: "", onAppbarRightButtonClicked: navToSignUPScreen),
       body: BlocProvider(
         create: (_) => CreatePasswordBloc(),
         child: const CreatePasswordForm(),
@@ -165,7 +167,12 @@ class _CreatePasswordFormState extends State<CreatePasswordForm> {
     });
   }
 
-  _onConfirmButtonClicked(BuildContext context) {}
+  _onConfirmButtonClicked(BuildContext context) {
+    Navigator.pushReplacementNamed(
+      context,
+      CreateUsernameScreen.routeName,
+    );
+  }
 
   void _toggleConfirmPasswordVisibility() {
     setState(() {
