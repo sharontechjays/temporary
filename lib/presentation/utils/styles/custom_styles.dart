@@ -61,46 +61,6 @@ class CustomElevatedButton extends StatelessWidget {
   }
 }
 
-class MyMaterialButton extends StatelessWidget {
-  const MyMaterialButton({
-    super.key,
-    required this.onClickButton(BuildContext context),
-  });
-
-  final void Function(BuildContext context) onClickButton;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onClickButton(context);
-      },
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          gradient: const LinearGradient(
-            colors: [
-              AppColors.primaryColor,
-              AppColors.secondaryColor,
-            ],
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(1.0, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          ),
-        ),
-        child: const Center(
-            child: Text(
-          'Get Started',
-          style: TextStyle(
-              color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
-        )),
-      ),
-    );
-  }
-}
-
 class AnimatedToggle extends StatelessWidget {
   final List<String> values;
   final ValueChanged<int> onToggleCallback;

@@ -140,7 +140,9 @@ class OnBoardingPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                MyMaterialButton(onClickButton: navToSignUp),
+                PrimaryButton(
+                    title: Strings.getStarted,
+                    onPrimaryButtonClicked: navToSignUp),
                 const SizedBox(
                   height: 20,
                 ),

@@ -4,6 +4,7 @@ Custom strings for all the screens
 class Strings {
   static const appName = "Bracketology";
   static const appNameBrackets = "[Bracketology]";
+  static const getStarted = "Get Started";
   static const usernameOrEmail = "Email or Username";
   static const logIn = "Log in";
   static const signIn = "Sign in";
