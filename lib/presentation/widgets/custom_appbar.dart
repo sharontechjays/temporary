@@ -9,12 +9,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(BuildContext context) onAppbarRightButtonClicked;
   final String title;
 
-  const CustomAppBar({
-    Key? key,
-    this.title="Sign up",
-    this.backgroundColor = AppColors.scaffoldBackground,
-    required this.onAppbarRightButtonClicked(BuildContext context)
-  }) : super(key: key);
+  const CustomAppBar(
+      {Key? key,
+      this.title = "Sign up",
+      this.backgroundColor = AppColors.scaffoldBackground,
+      required this.onAppbarRightButtonClicked(BuildContext context)})
+      : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -33,14 +33,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(),
-         /*     const Center(child: Text(Strings.appNameBrackets)),*/
-              const Center(
-                  child: Image(
-                      image: AssetImage('assets/drawables/bracketology_banner.png'))),
-              CustomTextButton(
-                text: title,
-                onClickButton: onAppbarRightButtonClicked,
+              const Expanded(flex: 2, child: SizedBox()),
+              /*     const Center(child: Text(Strings.appNameBrackets)),*/
+              const Expanded(
+                flex: 2,
+                child: Center(
+                    child: Image(
+                        image: AssetImage(
+                            'assets/drawables/bracketology_banner.png'))),
+              ),
+              Expanded(
+                flex: 2,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: CustomTextButton(
+                    text: title,
+                    onClickButton: onAppbarRightButtonClicked,
+                  ),
+                ),
               )
             ],
           ),
