@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/presentation/screens/allow_notifications_screen.dart';
 import 'package:test_flutter/presentation/screens/create_password_screen.dart';
 import 'package:test_flutter/presentation/screens/create_username.dart';
 import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
@@ -22,9 +23,11 @@ class AppRoutes {
         );
       },
       CreatePasswordScreen.routeName: (BuildContext context) =>
-      const CreatePasswordScreen(),
+          const CreatePasswordScreen(),
       CreateUsernameScreen.routeName: (BuildContext context) =>
-      const CreateUsernameScreen(),
+          const CreateUsernameScreen(),
+      AllowNotificationsScreen.routeName: (BuildContext context) =>
+          const AllowNotificationsScreen(),
     };
   }
 }

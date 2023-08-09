@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_flutter/data/SharedPreferencesHelper.dart';
 import 'package:test_flutter/presentation/blocs/create_password_bloc.dart';
 import 'package:test_flutter/presentation/constants/app_strings.dart';
 import 'package:test_flutter/presentation/screens/create_username.dart';
-import 'package:test_flutter/presentation/screens/onboarding/onboarding.dart';
 import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_colors.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
-
-import '../blocs/sign_in/sign_in_bloc.dart';
-import '../blocs/sign_in/sign_in_event.dart';
-import '../blocs/sign_in/sign_in_state.dart';
 import '../utils/styles/custom_dimens.dart';
 import '../widgets/custom_appbar.dart';
-import 'homepage.dart';
 
 class CreatePasswordScreen extends StatelessWidget {
   static const String routeName = RouteNames.createPasswordScreen;

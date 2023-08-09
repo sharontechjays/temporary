@@ -10,6 +10,7 @@ class Strings {
   static const signIn = "Sign in";
   static const email = "Email";
   static const confirm = "Confirm";
+  static const allowNotifications = "Allow Notification";
   static const resendCode = "Resend";
   static const usernameOrEmailHintText = "example@gmail.com";
   static const passwordHint = "Enter your password";
@@ -29,7 +30,10 @@ class Strings {
       "Create a strong and unique password using the guidelines below.";
   static const confirmPasswordHintText = "Re-enter new password";
   static const userName = "Username";
+  static const skip = "Skip";
   static const createUserName = "Create username";
+  static const neverMissAPage = "Never miss a moment";
+  static const notificationSubHeading = "Turn on push notifications to receive pick reminders, scoring updates, and more.";
   static const createUserNameScreenSubHeading =
       "Create a username with 3-20 characters.";
 }
@@ -38,6 +42,7 @@ class RouteNames {
   static const signInScreen = "sign_in";
   static const signUpScreen = "sign_up";
   static const verifyOtpScreen = "VerifyOTPScreen";
+  static const allowNotifications = "AllowNotificationsScreen";
   static const createPasswordScreen = "createPassword";
   static const createUsrNameScreen = "createUserName";
 }

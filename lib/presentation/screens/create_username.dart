@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/presentation/blocs/createusername/create_username_bloc.dart';
 import 'package:test_flutter/presentation/constants/app_strings.dart';
+import 'package:test_flutter/presentation/screens/allow_notifications_screen.dart';
 import 'package:test_flutter/presentation/screens/sign_in_screen.dart';
 import 'package:test_flutter/presentation/screens/sign_up_screen.dart';
 import 'package:test_flutter/presentation/utils/styles/custom_styles.dart';
@@ -69,6 +70,7 @@ class _CreateUserNameFormState extends State<CreateUserNameForm> {
             BlocConsumer<CreateUsernameBloc, CreateUsernameState>(
               listener: (context, state) {
                 if (state is CreateUsernameSuccess) {
+                  navToAllowNotificationScreen(context);
                 } else if (state is CreateUsernameFailure) {
                   _clearForm(context);
                 }
@@ -87,9 +89,8 @@ class _CreateUserNameFormState extends State<CreateUserNameForm> {
     );
   }
 
-  navToSignUpScreen(BuildContext context, String email) {
-    Navigator.pushReplacementNamed(context, SignUpScreen.routeName,
-        arguments: email);
+  navToAllowNotificationScreen(BuildContext context) {
+    Navigator.pushReplacementNamed(context, AllowNotificationsScreen.routeName);
   }
 
   void _onConfirmButtonClicked(BuildContext context) {

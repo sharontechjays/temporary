@@ -14,8 +14,11 @@ class CreateUsernameBloc
           emit(
               CreateUsernameFailure(error: "username shouldn't contain space"));
         } else {
-          emit(CreateUsernameSuccess(message: "usernameAvailable"));
+          emit(CreateUsernameSuccess(message: "username Available"));
         }
+      }
+      else {
+        emit(CreateUsernameSuccess(message: "username Available"));
       }
     });
   }
